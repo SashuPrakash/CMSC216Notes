@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>lecture1.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-1---5312022">Lecture 1 - 5/31/2022</h1>
+<h2 id="introduction">Introduction</h2>
+<p>These are the notes I take during class.</p>
+<ul>
+<li>Wherever I use the angle brackets <code>&lt;example&gt;</code>, they denote that you replace this chunk of text with something else <strong>without</strong> angle brackets <code>:)</code></li>
+</ul>
+<p>Before class starts, one must be able to log on to Grace following these <a href="http://www.cs.umd.edu/~nelson/classes/resources/GraceSystem.shtml">instructions</a> and then use <a href="http://www.cs.umd.edu/~nelson/classes/resources/LinuxIntro.shtml">this</a> site to set up their environment. I did this below.</p>
+<p>Note: if you are returning to this class, you must <a href="http://www.cs.umd.edu/~nelson/classes/resources/resetting_grace_env.html">reset your Grace Environment</a>.</p>
+<h2 id="using-grace">Using grace</h2>
+<ul>
+<li>&quot;Eclipse died&quot; - Nelson</li>
+<li>Command Line Interfaces (CLIs), are used everywhere in development, so it is good to know.</li>
+<li>Grace is a linux computer located at the address <code>grace.umd.edu</code>.
+<ul>
+<li>Remote computers such as grace are also called &quot;hosts&quot;.</li>
+</ul>
+</li>
+</ul>
+<p>To connect to grace, we must ssh to it. This can be done using an ssh client. For Windows, this class uses MobaXterm. For MacOS, this class uses XQuarts. Instructions to download these sofwares can be found <a href="http://www.cs.umd.edu/~nelson/classes/resources/GraceSystem.shtml">here</a>.</p>
+<p>In class, Nelson did not specify any ssh client for linux users. He also said linux users should know what they're doing. I believe to connect to grace from a linux client, you just do</p>
+<pre class="hljs"><code><div>ssh grace.umd.edu
+</div></code></pre>
+<p>from the command line.</p>
+<h3 id="using-grace-remotely">Using Grace Remotely</h3>
+<p>If you are not connected to eduroam at UMD, you will need to access campus resources such as Grace using a VPN. UMD uses GlobalProtectVPN. The installation instructions for this can be found at <a href="https://terpware.umd.edu/search?q=vpn">terpware</a>.</p>
+<h2 id="linux-commands">Linux Commands</h2>
+<ul>
+<li>Create directory by using <code>mkdir &lt;example&gt;</code> where <code>&lt;example&gt;</code> is the name of the folder you want to make.
+<ul>
+<li><code>mkdir</code> stands for  &quot;make directory&quot;</li>
+</ul>
+</li>
+<li>Go into a folder by using <code>cd &lt;folder&gt;</code> where <code>&lt;folder&gt;</code> is the name of the folder you want to go into</li>
+<li>Go back to the home folder by using <code>cd</code></li>
+<li>List everything in a folder using <code>ls</code>
+<ul>
+<li><code>ls -F</code> puts a <code>/</code> next to everything that is a folder</li>
+</ul>
+</li>
+<li>copy: <code>cp -r &lt;directory/of/file/or/folder/fileOrFolderName&gt; &lt;newDirectory&gt;</code>
+<ul>
+<li><code>-r</code> means recursive, so it will copy everything</li>
+</ul>
+</li>
+<li>remove directory: <code>rmdir &lt;dirName&gt;</code> where <code>&lt;dirName&gt;</code> is the name of the directory you wish to remove</li>
+<li>remove file: <code>rm &lt;fileName&gt;</code> where <code>&lt;fileName&gt;</code> is the name of the file you wish to remove</li>
+<li><code>mv</code>: renames a file or moves a file/directory to a directory.
+<ul>
+<li>for example, assuming <code>d1</code> is a directory and <code>m1</code> is a file:
+<ul>
+<li><code>mv f1 f2</code> -&gt; renames <code>f1</code> to <code>f2</code></li>
+<li><code>mv f1 d1</code> -&gt; moves <code>f1</code> to the directory <code>d1</code></li>
+<li><code>mv d1 d2</code> -&gt; renames <code>d1</code> to <code>d2</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="directories">Directories</h2>
+<ul>
+<li>Diretories are like folders</li>
+<li>In the host <code>grace.umd.edu</code>, there are several directories, one of which is your account which was set up using the link in Nelson's email.</li>
+<li>In your account folder, there is a <code>216</code> folder in which you can put your projects for this class.</li>
+</ul>
+<h2 id="multiple-windows">Multiple Windows</h2>
+<ul>
+<li>you can connect to Grace multiple times with an ssh client, so each connection is a new window you can use to interact with the host.</li>
+</ul>
+<h2 id="setting-up-the-environment">Setting up the environment</h2>
+<p>This command below will create the correct alias for submitting things, and links to class resources.</p>
+<pre class="hljs"><code><div>/afs/glue/class/summer12022/cmsc/216/0101/public/bin/setup_216
+</div></code></pre>
+<p>Restart the environment by using <code>exit</code> and then reconnecting using the same ssh methods.</p>
+<p>Now, if you execute <code>ls</code>, you should see that there is a <code>216</code> directory and a <code>216public</code> directory.</p>
+<ul>
+<li><code>216</code> directory - This directory is located in your home directory. You need to complete your assignments and do any work related to the course in this directory.</li>
+<li><code>216public</code> directory - You will see in your home directory a directory called <code>216public</code>. This is a directory we used to place material (e.g., project files, descriptions, etc.) you need for the course. Feel free to explore its contents. Note that you only have read permission for files available in 216public; if you want to edit any files, you need to copy our files to your 216 directory. For example, to copy class examples present in the directory <code>Week1</code>, you will execute the following command:
+<ul>
+<li>
+<pre class="hljs"><code><div>cp -r ~/216public/lecture_examples/Week1 ~/216
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>Next, we have to setup our <code>gcc</code> alias. I'll copy paste this from the above class resource.</p>
+<h3 id="setting-gcc-alias">Setting <code>gcc</code> Alias</h3>
+<p>In this course you need to compile code using gcc and a set of options. Instead of having to type those options every time, linux allows you to create an alias. The steps to create an alias are:</p>
+<ol>
+<li>Go to your home directory in grace. Remember that executing cd will take you to your home directory.</li>
+<li>In your home directory open (or create if it does not exist) a file called <code>.aliases</code>  (the filename has a period at the beginning.)</li>
+<li>Add the following line to the <code>.aliases</code> file and make sure you add a blank line after it.
+<ul>
+<li>
+<pre class="hljs"><code><div>alias gcc &quot;gcc -ansi -Wall -g -O0 -Wwrite-strings -Wshadow -pedantic-errors -fstack-protector-all -Wextra&quot;
+</div></code></pre>
+</li>
+</ul>
+</li>
+<li>Log out and then log on again.</li>
+<li>You can verify the alias has been set if you execute alias gcc and you see the new options.</li>
+<li>If you have problems you can also cut and paste the command from the file gcc_aliases_info.txt that you will find in the info directory of the grace public directory.</li>
+</ol>
+<h2 id="creating-files-using-editors">Creating Files Using Editors</h2>
+<p>When you open a file with an editor, you type that editor's name followed by the file you wish to open. For example, to edit a file named <code>p1.c</code> with <code>nano</code>, you can enter the command: <code>nano p1.c</code>. If <code>p1.c</code> does not exist, it will be created automatically.</p>
+<h2 id="nano">Nano</h2>
+<ul>
+<li><code>nano</code> is a file editor in Grace.</li>
+<li>open <code>nano</code> using <code>nano &lt;filename&gt;</code>, where <code>&lt;filename&gt;</code> is the name of the file you wish to edit. If the file doesn't exist, nano will create the file in the current directory.</li>
+<li>all commands in <code>nano</code> is shown at the bottom of the window.
+<ul>
+<li>the symbol <code>^</code> represents <code>ctrl</code>. For example, the command &quot;<code>^X</code>&quot; means &quot;<code>ctrl+X</code>&quot; to exit nano.</li>
+</ul>
+</li>
+</ul>
+<h3 id="coding-in-nano">Coding in nano</h3>
+<p>We can code in nano by just typing the code there. The example code is this:</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// stdio is "standard input/output"</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// i swear to got I do not like Pepsi because Coca-Cola &gt; Pepsi</span>
+    <span class="hljs-comment">// but this is just the example Nelson gives</span>
+     <span class="hljs-built_in">printf</span>(<span class="hljs-string">"I like Pepsi\n"</span>);
+
+     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<h2 id="compiling-code">Compiling code</h2>
+<ul>
+<li>the tool <code>gcc</code> compiles the code. Use it by using <code>gcc &lt;codeName&gt;</code> where <code>&lt;codeName&gt;</code> is the name of the file which contains your code.</li>
+<li><code>gcc</code> will output to a file called <code>a.out</code>. This file is the exacutable that <code>gcc</code> compiled. You can run this executable by typing <code>a.out</code>.</li>
+</ul>
+<p>Compile and execute <code>p1.c</code> by running</p>
+<pre class="hljs"><code><div>gcc p1.c
+</div></code></pre>
+<h2 id="introduction-summary">Introduction Summary</h2>
+<p>Here is a summary of how the class began.</p>
+<ol>
+<li>Learn how to use either MobaXTerm, XQuarts, or another ssh client to ssh into <code>grace.umd.edu</code>. The instrucitons for this are <a href="http://www.cs.umd.edu/~nelson/classes/resources/GraceSystem.shtml">here</a></li>
+<li>Follow this introduciton to linux <a href="http://www.cs.umd.edu/~nelson/classes/resources/GraceSystem.shtml">here</a>.</li>
+<li>Take a look at <a href="http://www.cs.umd.edu/~nelson/classes/resources/BasicLinux.shtml">these</a> basic linux comands by Nelson</li>
+</ol>
+<h2 id="c"><code>C</code></h2>
+<p>This example <code>C</code> program called <code>p2.c</code> shows some basic commands of a <code>C</code> program.</p>
+<pre class="hljs"><code><div><span class="hljs-meta"># <span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt; </span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-keyword">int</span> x, y;
+    <span class="hljs-keyword">float</span> m = <span class="hljs-number">3.75</span>;
+    <span class="hljs-keyword">char</span> letter = <span class="hljs-string">'a'</span>;
+
+    x = <span class="hljs-number">10</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"The value to print is %d and %f and %c\n"</span>, x, m, letter);
+
+    i = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">while</span> ( i &lt;= <span class="hljs-number">5</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Johnny and Amber\n"</span>)
+
+        i++;
+    }
+
+    <span class="hljs-keyword">if</span> (i == <span class="hljs-number">6</span>) {
+        done = <span class="hljs-number">1</span>;
+    } <span class="hljs-keyword">else</span> {
+        done = <span class="hljs-number">0</span>;
+    }
+
+    <span class="hljs-keyword">if</span> (done) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"yes, we are done\n"</span>);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"NOOOOOOOOOOOOO we are done\n"</span>);
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</div></code></pre>
+<ul>
+<li><code>if</code> statements are like Java</li>
+<li><code>while</code> loops are like in Java</li>
+<li><code>do-while</code> loops are like in Java</li>
+<li>there is no <code>boolean</code> type. In <code>C,</code> <code>0</code> is false, anything else is true.</li>
+<li>different compilers initialize uninitialilzed variables to different random variables.</li>
+</ul>
+
+</body>
+</html>
