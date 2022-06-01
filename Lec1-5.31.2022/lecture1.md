@@ -20,7 +20,7 @@ In class, Nelson did not specify any ssh client for linux users. He also said li
 ``` bash
 ssh grace.umd.edu
 ```
-from the command line.
+from the command line, and then log in.
 
 ### Using Grace Remotely
 
