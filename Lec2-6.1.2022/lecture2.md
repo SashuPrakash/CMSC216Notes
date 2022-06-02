@@ -2,9 +2,27 @@
 
 ## Introduction
 
+Nelson has posted videos from previous semesters in Panopto incase you want to watch them before class.
+
+Ekesh Kumar's notes is available on the class website
+
+## Review
+
+When we log into Grace, everyone's environment looks different because everyone has different directories and things in their environment.
+
 At this point, you should have run the setup command.
 * This will give you the `216` and `215public` directories.
     * the `216public` directory is read-only, so students cannot change it.
+
+We will work on projects and things in the `216` directory. The `216public` directory is read-only and it is where class materials are posted.
+
+The colors in Nelon's screen are due to the usage of MobaXTerm which has text highlighting.
+
+This class has very basic unix commands
+* cd
+* ls
+    * ls -F shows slash next to all the folders
+* mkdir
 
 When you connect to Grace, you will see a number next to `Grace` such as `grace3:`. This number represents the specific host within the cluster to which you have connected.
 
@@ -24,15 +42,18 @@ cp -r ~/216public/lecture_examples/Week01/ ~/216
 
 Note: pressing tab after typing the beginning of a word or command will autocomplete it. It will even autocomplete using the names of the contents which you can access.
 
+Note: Since `~` represents the home directory, typing `cd ~` is the same as typing `cd`.
+
 ## Removing things
 
 This command removes the `Week01` and everything in it.
+* Unix does not give any second chances. You cannot easily recover a deleted file. 
 
 ``` bash
 rm -r Week01
 ```
 
-To bypass all the confirmations, use `-F`.
+To bypass all the confirmations, use `-f`, which means force.
 
 ## Moving things
 
@@ -57,15 +78,28 @@ Then we can simply type code such as this:
 #include <stdio.h>
 
 int main() {
+    int x = 100;
+    
+    printf("%d\", x + 2);
 
+    return 0;
 }
 ```
 
-* Save a file using escape, `shift`+`:`
+To save your work, hit escape, then hit `shift` + `:`, then type `w` and then `enter`.
+* Escape leaves the typing section of `vi` and lets you enter commands. 
+* `shift` + `:` begins the commands for the file
+* the command `w` denotes write changes to file
+* the command `q` denotes quit `vi`.
+
+To summarize:
+* Save a file using escape, `shift`+`:`.
 * Write the file using `w`.
 * Quit the editor using `q`.
-
+* Commands can be chained together such that `wq` will write your changes to the file and subsequently quit `vi`. 
 Often, we will write and quit so we just do `wq` in vim.
+
+These commands are the same in `vim`.
 
 ## Class Website
 
