@@ -87,19 +87,21 @@ int main() {
 ```
 
 To save your work, hit escape, then hit `shift` + `:`, then type `w` and then `enter`.
-* Escape leaves the typing section of `vi` and lets you enter commands. 
-* `shift` + `:` begins the commands for the file
+* `shift` + `:` escapes the typing section of `vi` and lets you enter commands. 
 * the command `w` denotes write changes to file
 * the command `q` denotes quit `vi`.
 
 To summarize:
-* Save a file using escape, `shift`+`:`.
+* Escape using `shift`+`:`.
 * Write the file using `w`.
 * Quit the editor using `q`.
 * Commands can be chained together such that `wq` will write your changes to the file and subsequently quit `vi`. 
 Often, we will write and quit so we just do `wq` in vim.
 
 These commands are the same in `vim`.
+
+More commands:
+* `o` adds a line
 
 ## Class Website
 
@@ -114,6 +116,9 @@ gcc -ansi -Wall -g -O0 -Wwrite-strings -Wshadow -pedantic-errors -fstack-protect
 ```
 
 This is a rediculous amount of flags to write, so we can create an alias for `gcc` such that whenever we use `gcc`, all those flags are used. To do this, follow the instructions [here](http://www.cs.umd.edu/~nelson/classes/resources/setting_gcc_alias/).
+
+To know if you did the alias correctly, you will know if you pass the class.
+* just kidding. You can check by typing `alias gcc`
 
 ## C
 

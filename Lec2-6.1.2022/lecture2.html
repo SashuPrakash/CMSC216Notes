@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>lecture2.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-2---612022">Lecture 2 - 6/1/2022</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Nelson has posted videos from previous semesters in Panopto incase you want to watch them before class.</p>
+<p>Ekesh Kumar's notes is available on the class website</p>
+<h2 id="review">Review</h2>
+<p>When we log into Grace, everyone's environment looks different because everyone has different directories and things in their environment.</p>
+<p>At this point, you should have run the setup command.</p>
+<ul>
+<li>This will give you the <code>216</code> and <code>215public</code> directories.
+<ul>
+<li>the <code>216public</code> directory is read-only, so students cannot change it.</li>
+</ul>
+</li>
+</ul>
+<p>We will work on projects and things in the <code>216</code> directory. The <code>216public</code> directory is read-only and it is where class materials are posted.</p>
+<p>The colors in Nelon's screen are due to the usage of MobaXTerm which has text highlighting.</p>
+<p>This class has very basic unix commands</p>
+<ul>
+<li>cd</li>
+<li>ls
+<ul>
+<li>ls -F shows slash next to all the folders</li>
+</ul>
+</li>
+<li>mkdir</li>
+</ul>
+<p>When you connect to Grace, you will see a number next to <code>Grace</code> such as <code>grace3:</code>. This number represents the specific host within the cluster to which you have connected.</p>
+<h2 id="copying-things">Copying Things</h2>
+<p>This command copies the <code>Week01</code> directory from the <code>216public</code> directory to our own <code>216</code> directory in our home directory.</p>
+<pre class="hljs"><code><div>cp -r ~/216public/lecture_examples/Week01/ ~/216
+</div></code></pre>
+<ul>
+<li><code>cp</code> is the copy command.</li>
+<li><code>~</code> (tilde) represents the home directory.</li>
+<li><code>-r</code> means recursive</li>
+<li><code>~/216public/lecture_examples/Week01/</code> is what we want to grab.</li>
+<li><code>~/216</code> is where we want to put it.</li>
+</ul>
+<p>Note: pressing tab after typing the beginning of a word or command will autocomplete it. It will even autocomplete using the names of the contents which you can access.</p>
+<p>Note: Since <code>~</code> represents the home directory, typing <code>cd ~</code> is the same as typing <code>cd</code>.</p>
+<h2 id="removing-things">Removing things</h2>
+<p>This command removes the <code>Week01</code> and everything in it.</p>
+<ul>
+<li>Unix does not give any second chances. You cannot easily recover a deleted file.</li>
+</ul>
+<pre class="hljs"><code><div>rm -r Week01
+</div></code></pre>
+<p>To bypass all the confirmations, use <code>-f</code>, which means force.</p>
+<h2 id="moving-things">Moving things</h2>
+<p>Suppose we want to move things from a directory <code>old</code> to <code>old2</code>.</p>
+<p>The command <code>mv</code> moves things.</p>
+<pre class="hljs"><code><div>mv old old2
+</div></code></pre>
+<h2 id="typing-in-files">Typing in files</h2>
+<p>To type in a file, we can simply use an editor such as vi, vim, or nano. For example, we can type in a file called <code>p1.c</code> by using</p>
+<pre class="hljs"><code><div>vi p1.c
+</div></code></pre>
+<p>Then we can simply type code such as this:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> x = <span class="hljs-number">100</span>;
+    
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\", x + 2);
+
+    return 0;
+}
+</span></div></code></pre>
+<p>To save your work, hit escape, then hit <code>shift</code> + <code>:</code>, then type <code>w</code> and then <code>enter</code>.</p>
+<ul>
+<li><code>shift</code> + <code>:</code> escapes the typing section of <code>vi</code> and lets you enter commands.</li>
+<li>the command <code>w</code> denotes write changes to file</li>
+<li>the command <code>q</code> denotes quit <code>vi</code>.</li>
+</ul>
+<p>To summarize:</p>
+<ul>
+<li>Escape using <code>shift</code>+<code>:</code>.</li>
+<li>Write the file using <code>w</code>.</li>
+<li>Quit the editor using <code>q</code>.</li>
+<li>Commands can be chained together such that <code>wq</code> will write your changes to the file and subsequently quit <code>vi</code>.
+Often, we will write and quit so we just do <code>wq</code> in vim.</li>
+</ul>
+<p>These commands are the same in <code>vim</code>.</p>
+<p>More commands:</p>
+<ul>
+<li><code>o</code> adds a line</li>
+</ul>
+<h2 id="class-website">Class Website</h2>
+<p>On the class website, you can see resources by going to the dropdown menu. Here, you will find all the Linux commands you will need for this class.</p>
+<h2 id="aliases">Aliases</h2>
+<p>When one wants to compile code in this class, we must use <code>gcc</code> with many flags like this:</p>
+<pre class="hljs"><code><div>gcc -ansi -Wall -g -O0 -Wwrite-strings -Wshadow -pedantic-errors -fstack-protector-all -Wextra p1.c
+</div></code></pre>
+<p>This is a rediculous amount of flags to write, so we can create an alias for <code>gcc</code> such that whenever we use <code>gcc</code>, all those flags are used. To do this, follow the instructions <a href="http://www.cs.umd.edu/~nelson/classes/resources/setting_gcc_alias/">here</a>.</p>
+<p>To know if you did the alias correctly, you will know if you pass the class.</p>
+<ul>
+<li>just kidding. You can check by typing <code>alias gcc</code></li>
+</ul>
+<h2 id="c">C</h2>
+<p>Let's take a look at <code>print example</code> in <code>C-Language-II-Code</code> in <code>216public</code>.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{   <span class="hljs-comment">/* Notice the void to indicate no parameters */</span>
+   <span class="hljs-keyword">int</span> age = <span class="hljs-number">18</span>;
+   <span class="hljs-keyword">float</span> salary = <span class="hljs-number">100.50</span>;
+   <span class="hljs-keyword">char</span> gender = <span class="hljs-string">'F'</span>;
+   <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *address = <span class="hljs-string">"AV Williams Bld"</span>;
+
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Age: %d, Salary: %f, Gender: %c\n"</span>, age, salary, gender);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Address: %s\n"</span>, address);
+
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>The line</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">printf</span>(<span class="hljs-string">"Age: %d, Salary: %f, Gender: %c\n"</span>, age, salary, gender);
+</div></code></pre>
+<p>is a formatted string.</p>
+<p>Next, let's look at the program <code>reading.c</code>.</p>
+<p>In this code, there is <code>%c</code> and <code>%d</code> for input.</p>
+<ul>
+<li><code>%d</code> skips/ignores all spaces and newlines.</li>
+<li><code>%c</code> inludes spaces and newlines</li>
+</ul>
+<h2 id="scanf-conversion-specifiers">scanf() conversion specifiers</h2>
+<ul>
+<li><code>%d</code>, <code>%x</code>, <code>%o</code>
+<ul>
+<li>Reads a decimal, hex, or octal number into an <code>int</code></li>
+</ul>
+</li>
+<li>%f reads in a <code>float</code></li>
+<li>%lf reads in a <code>double</code></li>
+<li>%ld reads in a <code>long</code></li>
+<li>%c reads in a <code>char</code></li>
+<li>%s reads in a <code>string</code> (bounded by whitespace)</li>
+</ul>
+<h2 id="naming-convention-in-c">Naming Convention in <code>C</code></h2>
+<p>In C, we don't use camelCase by convention. Instead, we separate words with underscores. Instead of <code>letterGrade</code>, we would use <code>letter_grade</code>.</p>
+
+</body>
+</html>
