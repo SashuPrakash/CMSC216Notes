@@ -464,7 +464,11 @@ Often, we will write and quit so we just do <code>wq</code> in vim.</li>
 <li>just kidding. You can check by typing <code>alias gcc</code></li>
 </ul>
 <h2 id="c">C</h2>
-<p>Let's take a look at <code>print example</code> in <code>C-Language-II-Code</code> in <code>216public</code>.</p>
+<h3 id="example-printexamplec">Example: <code>print_example.c</code></h3>
+<p>Let's take a look at <code>print_example.c</code> in <code>C-Language-II-Code</code> in <code>216public</code>. Nelson opened this code by using the command</p>
+<pre class="hljs"><code><div>more print_example.c
+</div></code></pre>
+<p><code>more</code>, like <code>cat</code>, simply displays the text content of the file: in this case, <code>print_example</code>. Here is the output of <code>more print_example.c</code>:</p>
 <pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
 
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{   <span class="hljs-comment">/* Notice the void to indicate no parameters */</span>
@@ -479,17 +483,167 @@ Often, we will write and quit so we just do <code>wq</code> in vim.</li>
    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </div></code></pre>
-<p>The line</p>
-<pre class="hljs"><code><div><span class="hljs-built_in">printf</span>(<span class="hljs-string">"Age: %d, Salary: %f, Gender: %c\n"</span>, age, salary, gender);
-</div></code></pre>
-<p>is a formatted string.</p>
-<p>Next, let's look at the program <code>reading.c</code>.</p>
-<p>In this code, there is <code>%c</code> and <code>%d</code> for input.</p>
+<p>Let's analyze this code.</p>
 <ul>
-<li><code>%d</code> skips/ignores all spaces and newlines.</li>
-<li><code>%c</code> inludes spaces and newlines</li>
+<li>The first line is just the normal include statement for being able to use standard input and output.</li>
+<li>In the <code>main</code> parameters, we see <code>void</code>. This signifies that the program doesn't take any arguments.</li>
+<li>There are then four variables declared
+<ul>
+<li><code>const char</code> is how a string is declared in C.</li>
 </ul>
-<h2 id="scanf-conversion-specifiers">scanf() conversion specifiers</h2>
+</li>
+<li>The line<pre class="hljs"><code><div><span class="hljs-built_in">printf</span>(<span class="hljs-string">"Age: %d, Salary: %f, Gender: %c\n"</span>, age, salary, gender);
+</div></code></pre>
+is a formatted string.
+<ul>
+<li>as you can see, the use of <code>%s</code> allows us to display a string.</li>
+<li>the use of <code>%d</code> allows us to display a <code>double</code></li>
+<li>the use of <code>%f</code> allows us to display a <code>float</code></li>
+<li>the use of <code>%c</code> allows us to display a <code>char</code></li>
+<li>In a formatted string, make sure that all parameters are in the same order as their placeholders.</li>
+</ul>
+</li>
+</ul>
+<p>By running <code>gcc print_example.c</code>, we can see that the output is as expected:</p>
+<pre class="hljs"><code><div>Age: 18, Salary: 100.500000, Gender: F
+Address: AV Williams Bld
+</div></code></pre>
+<h3 id="printf-conversion-specifiers">printf conversion specifiers</h3>
+<ul>
+<li><code>%c</code> prints the corresponding argument to printf as an unsigned character</li>
+<li><code>%d</code> prints as a decimal integer</li>
+<li><code>%f</code> prints in floating point format</li>
+<li><code>%s</code> prints as a string (null-terminated character array)</li>
+<li><code>%%</code> prints a % (so <code>%%</code> prints as %)</li>
+<li><code>%u</code> prints as an unsigned integer</li>
+<li><code>%x</code> prints in hexadecimal (use <code>%X</code> for capital A-F)</li>
+<li><code>%e</code> prints in exponential form (e.g., 6.02300e3)</li>
+</ul>
+<h3 id="clear-command">Clear Command</h3>
+<p>The command <code>clear</code> will clear the entire screen to make the screen cleaner to look at.</p>
+<h3 id="inputs-in-c">Inputs in C</h3>
+<p>In C, we use the <code>scanf()</code> function to read input</p>
+<ul>
+<li>Definition:
+<ul>
+<li>Its declaration is also included with <code>#include &lt;stdio.h&gt;</code> (its definition in the C standard I/O library)</li>
+</ul>
+</li>
+<li>Syntax:
+<ul>
+<li>scanf(&quot;format string&quot;, &amp;variable1, &amp;variable2, &amp;variable3, ...);</li>
+</ul>
+</li>
+<li>Format strings can contain:
+<ul>
+<li>Whitespace, meaning any whitespace at that point will be skipped</li>
+<li><strong>Conversion specifiers</strong> (<code>%d</code>, <code>%f</code>, <code>%c</code>, etc) which cause something to be read
+<ul>
+<li>Many (<strong>but not all</strong>) skip leading whitespace anyway</li>
+</ul>
+</li>
+<li>Any other characters, which are then required in input</li>
+</ul>
+</li>
+<li>Arguments (variable names) indicate where converted input is to be stored, and their types should match the format specifiers</li>
+<li><code>scanf()</code> does not check for type agreement between the conversion specifier and the associated variable</li>
+<li>If a given conversion specifier doesn't match, <code>scanf()</code> stops processing at that point</li>
+<li><strong>Value returned</strong>: <code>scanf()</code> returns the number of items assigned into variables or EOF (End of File Marker)</li>
+<li><strong>Notice the <code>&amp;</code> associated with the variables</strong>
+<ul>
+<li>Next to a variable means “get the address of this variable”</li>
+</ul>
+</li>
+</ul>
+<h3 id="example-readingc">Example: <code>reading.c</code></h3>
+<p>Next, let's look at the program <code>reading.c</code>.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+   <span class="hljs-keyword">int</span> value;
+   <span class="hljs-keyword">char</span> the_character;
+
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter an integer: "</span>);
+   <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;value);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"First integer value is %d\n"</span>, value);
+
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\nEnter a character and an integer: "</span>);
+
+   <span class="hljs-comment">/* We need a space before %c; this space means consume spaces. */</span>
+   <span class="hljs-comment">/* After the first integer we provided we have a newline. This */</span>
+   <span class="hljs-comment">/* newline is the result of pressing enter.  If you don't      */</span>
+   <span class="hljs-comment">/* remove it, the_next_character variable will have a newline  */</span>
+   <span class="hljs-comment">/* character.  Remember, when you press enter that is actually */</span>
+   <span class="hljs-comment">/* the '\n' character.                                         */</span>
+
+   <span class="hljs-comment">/* Notice space before %c. */</span>
+   <span class="hljs-built_in">scanf</span>(<span class="hljs-string">" %c%d"</span>, &amp;the_character, &amp;value);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"The character is %c\n"</span>, the_character);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"The second integer value is %d\n"</span>, value);
+
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>After compiling the code, here is a sample run:</p>
+<pre class="hljs"><code><div>Enter an integer: 23
+First integer value is 23
+
+Enter a character and an integer: X 45
+The character is X
+The second integer value is 45
+</div></code></pre>
+<p>Similar to <code>printf()</code>, the function <code>scanf()</code> also requires a formatted string.</p>
+<ul>
+<li>Notice the <code>&amp;</code> sign next to the variable <code>value</code> in the formatted string. Here, the <code>&amp;value</code> represents the address of the <code>value</code> variable. This is how <code>scanf()</code> formatted strings work.</li>
+</ul>
+<p>Here's another sample run of the code:</p>
+<pre class="hljs"><code><div>Enter an integer:
+
+    
+
+           
+    
+      
+
+          7
+First integer value is 7
+
+Enter a character and an integer:
+</div></code></pre>
+<p>Notice that there is a lot of space where the user entered spaces (you'll see them if you highlight the sample code-block) and newlines, but the program only took in the input once 7 was entered. This is because in <code>scanf()</code>, <code>%d</code> ignores whitespace such as spaces and new-lines.</p>
+<p>Now, suppose we modifed the code such that the line</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Notice space before %c. */</span>
+   <span class="hljs-built_in">scanf</span>(<span class="hljs-string">" %c%d"</span>, &amp;the_character, &amp;value);
+</div></code></pre>
+<p>becomes</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Notice no space before %c. */</span>
+   <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%c%d"</span>, &amp;the_character, &amp;value);
+</div></code></pre>
+<p>Here, we removed the space before <code>%c</code>.</p>
+<p>Now, here's a sample run of this new code:</p>
+<pre class="hljs"><code><div>Enter an integer: 7
+First integer value is 7
+
+Enter a character and an integer: X 45
+The character is
+
+The second integer value is 7
+</div></code></pre>
+<p>Where did the <code>X</code> and the <code>45</code> go? Let's take a look at the input. This is what we typed:</p>
+<pre class="hljs"><code><div>7\nX 45
+</div></code></pre>
+<p>What did the code do with this?</p>
+<ol>
+<li>The code took <code>7</code> as the first integer.</li>
+<li>The code took <code>\n</code> as the character
+<ul>
+<li>This was printed after <code>The character is </code></li>
+</ul>
+</li>
+<li>The code tried to take <code>X</code> as an integer, but since <code>X</code> isn't one, the process stops.</li>
+</ol>
+<p>This is why the space was put before the <code>%c</code> in that line. It signifies that the placeholder should skip all the spaces.</p>
+<h3 id="scanf-conversion-specifiers">scanf() conversion specifiers</h3>
 <ul>
 <li><code>%d</code>, <code>%x</code>, <code>%o</code>
 <ul>
@@ -502,8 +656,320 @@ Often, we will write and quit so we just do <code>wq</code> in vim.</li>
 <li>%c reads in a <code>char</code></li>
 <li>%s reads in a <code>string</code> (bounded by whitespace)</li>
 </ul>
+<h2 id="c-control-statements">C control statements</h2>
+<ul>
+<li>C has <code>if/else</code>, <code>while</code>, <code>for</code>, <code>do-while</code>, and <code>switch</code> statements, as in Java
+<ul>
+<li>Due to the compiler flags we use you can't declare variables in for loop</li>
+<li>In C89/C90 you cannot declare variables in a for loop header;
+<ul>
+<li>Possible in C99/C11.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>break</code>: immediately ends loop</li>
+<li><code>continue</code>: skip remainder of loop body; returns to beginning of the loop
+<ul>
+<li>In case of <code>for</code> loop, performs third expression of the loop <code>(expr1;expr2;expr3)</code></li>
+</ul>
+</li>
+<li>Don't abuse <code>break/continue</code>, and rarely use <code>continue</code> if at all</li>
+<li>Compound statement
+<ul>
+<li>Can go anywhere a single statement goes</li>
+<li>Surrounded by <code>{ }</code></li>
+<li>Can have block local variables declared at beginning of function</li>
+</ul>
+</li>
+</ul>
+<h3 id="example-controlstmtsc">Example: <code>control_stmts.c</code></h3>
+<p>Here is the example code:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+   <span class="hljs-keyword">int</span> limit, done, curr;
+
+   <span class="hljs-comment">/* Reading a positive value */</span>
+   <span class="hljs-keyword">do</span> {
+      <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter limit to print even/odd values: "</span>);
+      <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;limit);
+      done = limit &gt; <span class="hljs-number">0</span>;
+      <span class="hljs-keyword">if</span> (!done) {
+         <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Invalid value %d provided (must be &gt; 0)\n"</span>, limit);
+      }
+   } <span class="hljs-keyword">while</span>(!done);
+
+   <span class="hljs-comment">/* Printing even values */</span>
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Even values up to %d: "</span>, limit);
+   curr = <span class="hljs-number">2</span>;
+   <span class="hljs-keyword">while</span>(curr &lt;= limit) {
+      <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, curr);
+
+      curr += <span class="hljs-number">2</span>;
+   }
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);
+
+   <span class="hljs-comment">/* Printing odd values */</span>
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Odd values up to %d: "</span>, limit);
+   <span class="hljs-keyword">for</span> (curr = <span class="hljs-number">1</span>; curr &lt;= limit; curr += <span class="hljs-number">2</span>) {
+      <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, curr);
+   }
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);
+
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>As you can see, <code>while</code> loop and for loop are the <code>same</code>.</p>
+<p>Also, notice that we <strong>cannot</strong> declare the iteration variable using <code>int curr</code> inside the <code>for</code> loop header.</p>
+<h2 id="formatting">Formatting</h2>
+<p>In <code>printf()</code>, if we wish to print a <code>float</code> to only 2 decimal places (such as for a currency), we can use the placeholder <code>.%2f</code> instead of <code>%f</code>.</p>
+<h3 id="controlling-formatting">Controlling Formatting</h3>
+<p>We can supply modifiers to conversion specifiers (e.g., a field
+width, precision, etc.) to format our output exactly as we want</p>
+<ul>
+<li><code>%04x</code>: format as unsigned hex number, with 4 spaces and zero padding</li>
+<li><code>%-10s</code>: format as string, allot 10 spaces, left justify (default is right justified)</li>
+<li><code>%6.4f</code>: format as floating point, allot 6 spaces, 4 digits after the decimal point</li>
+</ul>
 <h2 id="naming-convention-in-c">Naming Convention in <code>C</code></h2>
 <p>In C, we don't use camelCase by convention. Instead, we separate words with underscores. Instead of <code>letterGrade</code>, we would use <code>letter_grade</code>.</p>
+<h2 id="c-functions">C Functions</h2>
+<ul>
+<li>C is not object-oriented so we don’t use the term method (we use function)</li>
+<li>C Functions have the following format<pre class="hljs"><code><div><span class="hljs-function">returnType <span class="hljs-title">functionName</span> <span class="hljs-params">(parameter <span class="hljs-built_in">list</span>)</span> </span>{
+  <span class="hljs-comment">/* statements */</span>
+}
+</div></code></pre>
+</li>
+<li>To call a function - <code>functionName(argument list);</code></li>
+<li>We have local variables and <code>return</code> statements as in Java</li>
+<li>Function prototype declarations provide information about a function's return type and parameters, but do not define the function
+<ul>
+<li><strong>Prototype is the first line of a function without the <code>{</code></strong></li>
+</ul>
+</li>
+<li>Using function declarations (prototypes) allows the compiler to check your function calls for correctness</li>
+<li>When a program (in a single file) has several functions (including <code>main</code>), in which order can the functions appear?
+<ul>
+<li>Without prototypes, functions must be defined before used (must appear before main if possible)</li>
+<li>With prototypes, place prototypes at the top and functions can appear in any order</li>
+</ul>
+</li>
+<li>Typical program organization
+<ul>
+<li>#includes</li>
+<li>Prototypes</li>
+<li><code>main()</code> and functions (in any order although some people prefer <code>main()</code> first or last)</li>
+</ul>
+</li>
+</ul>
+<h3 id="example-computegradec">Example: <code>compute_grade.c</code></h3>
+<p>Here is an example of the code that shows functional programming in C. It also that functions and vairable names are named using <code>underscores</code> <strong>instead</strong> of <code>camelCase</code>.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-comment">/*
+ * letter_grade prototype. Without it the function definition
+ * must appear appear before main.
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">char</span> <span class="hljs-title">letter_grade</span><span class="hljs-params">(<span class="hljs-keyword">float</span> score)</span></span>;  <span class="hljs-comment">/* prototype */</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+   <span class="hljs-comment">/* Providing values for score1 and score2 to */</span>
+   <span class="hljs-comment">/* see what happens when not enough values   */</span>
+   <span class="hljs-comment">/* are provided by user.                     */</span>
+   <span class="hljs-keyword">float</span> score1 = <span class="hljs-number">77</span>, score2 = <span class="hljs-number">88</span>, avg;
+   <span class="hljs-keyword">int</span> values_read;
+
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter two scores using &lt;score1&gt; and &lt;score2&gt; format: "</span>);
+   values_read = <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%f and %f"</span>, &amp;score1, &amp;score2);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"The number of values read is %d\n"</span>, values_read);
+
+   avg = (score1 + score2) / <span class="hljs-number">2</span>;
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Average for %f and %f is %.2f\n"</span>, score1, score2, avg);
+
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Your letter grade is %c\n"</span>, letter_grade(avg));
+
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-comment">/* Function definition */</span>
+<span class="hljs-function"><span class="hljs-keyword">char</span> <span class="hljs-title">letter_grade</span><span class="hljs-params">(<span class="hljs-keyword">float</span> score)</span> </span>{
+   <span class="hljs-keyword">char</span> grade;
+
+   <span class="hljs-keyword">if</span> (score &gt;= <span class="hljs-number">90</span>) {
+      grade = <span class="hljs-string">'A'</span>;
+   } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (score &gt;= <span class="hljs-number">80</span>) {
+      grade = <span class="hljs-string">'B'</span>;
+   } <span class="hljs-keyword">else</span> {
+      grade = <span class="hljs-string">'F'</span>;
+   }
+
+   <span class="hljs-keyword">return</span> grade;
+}
+</div></code></pre>
+<p>In C, everything is passed to functions by value (copy), not reference.</p>
+<p>Note that the function <code>letter_grade</code> appears as a prototype <strong>before</strong> <code>main</code>, but then is defined after it. The prototype appears here so because the compiler needs to know about <code>letter_grade</code> when it reads and compiles <code>main</code>, which calls <code>letter_grade</code>.</p>
+<ul>
+<li>Without this prototype, the program will not be able to compile.</li>
+</ul>
+<h2 id="interesting-nelson-quote">Interesting Nelson Quote</h2>
+<p>&quot;You see, we say that you can date Java, but you will marry C. <code>:D</code> Are you with me? This is the language you'll give a ring. YAAAY! Eh Jaja&quot; - Nelson.</p>
+<h2 id="c-functions-cont">C Functions Cont.</h2>
+<ul>
+<li>Arguments in C (<strong>all types of arguments</strong>) are passed by value
+<ul>
+<li>Pass by value - you initialize parameter with a copy of the argument</li>
+<li>Let’s quickly review passing by value</li>
+</ul>
+</li>
+<li>Where should the function definition appear?
+<ul>
+<li>Before <code>main</code>? After <code>main</code>?</li>
+<li>Can we have a function defined inside of another function?
+<ul>
+<li>The set of <code>gcc</code> flags that we are using does not allow it</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>How about recursion? Yes, as we have a stack as in Java</li>
+<li>Can we have function overloading?
+<ul>
+<li>NO.</li>
+<li><code>printf</code> function looks like it is overloaded, but it is NOT
+<ul>
+<li><code>printf</code> with three or twenty arguments refers to the same function</li>
+</ul>
+</li>
+<li>In C, functions can be designed to accept several paremeters. This is not overloading.</li>
+</ul>
+</li>
+</ul>
+<h2 id="manual-pages">Manual Pages</h2>
+<p>To see documentation about functions in linux, you can use the command <code>man</code> followed by the funciton. For example, the command</p>
+<pre class="hljs"><code><div>man <span class="hljs-built_in">printf</span>
+</div></code></pre>
+<p>will output these pages</p>
+<pre class="hljs"><code><div>PRINTF(1)                        User Commands                       PRINTF(1)
+
+
+
+NAME
+       <span class="hljs-built_in">printf</span> - format and <span class="hljs-built_in">print</span> data
+
+SYNOPSIS
+       <span class="hljs-built_in">printf</span> FORMAT [ARGUMENT]...
+       <span class="hljs-built_in">printf</span> OPTION
+
+DESCRIPTION
+       Print ARGUMENT(s) according to FORMAT, or execute according to OPTION:
+
+       --<span class="hljs-built_in">help</span> display this <span class="hljs-built_in">help</span> and <span class="hljs-built_in">exit</span>
+
+       --version
+              output version information and <span class="hljs-built_in">exit</span>
+
+       FORMAT controls the output as <span class="hljs-keyword">in</span> C <span class="hljs-built_in">printf</span>.  Interpreted sequences are:
+
+       \"     double quote
+
+       \\     backslash
+
+       \a     alert (BEL)
+
+       \b     backspace
+
+       \c     produce no further output
+
+       \e     escape
+
+       \f     form feed
+
+       \n     new line
+
+       \r     carriage <span class="hljs-built_in">return</span>
+
+       \t     horizontal tab
+
+       \v     vertical tab
+
+       \NNN   byte with octal value NNN (1 to 3 digits)
+
+       \xHH   byte with hexadecimal value HH (1 to 2 digits)
+
+       \uHHHH Unicode (ISO/IEC 10646) character with hex value HHHH (4 digits)
+
+       \UHHHHHHHH
+              Unicode character with hex value HHHHHHHH (8 digits)
+
+       %%     a single %
+
+       %b     ARGUMENT  as  a string with <span class="hljs-string">'\'</span> escapes interpreted, except that
+              octal escapes are of the form \0 or \0NNN
+
+       and all C format specifications ending with one of diouxXfeEgGcs,  with
+       ARGUMENTs converted to proper <span class="hljs-built_in">type</span> first.  Variable widths are handled.
+
+       NOTE:  your  shell  may  have  its own version of <span class="hljs-built_in">printf</span>, <span class="hljs-built_in">which</span> usually
+       supersedes the version described here.  Please refer  to  your  shell<span class="hljs-string">'s
+       documentation for details about the options it supports.
+
+       GNU  coreutils  online  help:  &lt;http://www.gnu.org/software/coreutils/&gt;
+       Report printf translation bugs to &lt;http://translationproject.org/team/&gt;
+
+AUTHOR
+       Written by David MacKenzie.
+
+COPYRIGHT
+       Copyright © 2013 Free Software Foundation, Inc.   License  GPLv3+:  GNU
+       GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;.
+       This  is  free  software:  you  are free to change and redistribute it.
+       There is NO WARRANTY, to the extent permitted by law.
+
+SEE ALSO
+       printf(3)
+
+       The full documentation for printf is maintained as  a  Texinfo  manual.
+       If  the  info  and printf programs are properly installed at your site,
+       the command
+
+              info coreutils '</span><span class="hljs-built_in">printf</span> invocation<span class="hljs-string">'
+
+       should give you access to the complete manual.
+
+
+
+GNU coreutils 8.22                 July 2020                         PRINTF(1)
+</span></div></code></pre>
+<p>Furthermore, one can look at different pages of the manual by entering a page number as that parameter. For example</p>
+<pre class="hljs"><code><div>man 3 <span class="hljs-built_in">printf</span>
+</div></code></pre>
+<p>will show the 3rd page of printf documentation. I'm not gonna put that here because it's even longer than this page.</p>
+<h2 id="beware">Beware</h2>
+<ul>
+<li>Local variables in a function must be declared at the top of the function otherwise you will get an error similar to the following:<pre class="hljs"><code><div>“declaration.c:6:4: error: ISO C90 forbids mixed declarations and code [-Wpedantic]”
+</div></code></pre>
+</li>
+<li>Do not add \n at the end of scanf<pre class="hljs"><code><div><span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d\n"</span>, &amp;age);
+</div></code></pre>
+</li>
+<li>Do not add \n at the end of scan</li>
+<li>If you want to compile and modify class examples you must copy them to your 216 directory</li>
+</ul>
+<h3 id="example-bewarec">Example: <code>beware.c</code></h3>
+<p>Take a look at this example code</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+   <span class="hljs-keyword">int</span> age;
+
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter age: "</span>);
+   <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;age);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Your age is: %d\n"</span>, age);
+
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>You'll notice that if you put <code>\n</code> at the end of <code>scanf()</code>, your code will not work as expected.</p>
 
 </body>
 </html>
