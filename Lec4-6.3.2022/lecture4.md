@@ -106,3 +106,67 @@ int main() {
 }
 ```
 
+## Switching Between Clusters
+
+You can switch from one cluster by `ssh`ing to another node within the Grace cluster. This may help if there are many people on one node
+
+## The `sizeof` operator
+* Unary **operator**, evaluates to the number of bytes necessary to hold its operand
+* Operand can be an expression or a type name
+    * It does NOT evaluate the expression
+* Examples:
+  ```
+  int i = 5;
+  printf("%ld\n", sizeof(i));
+  printf("%ld\n", sizeof(unsigned char));
+  printf("%ld\n", sizeof(++i));
+  printf("%d\n", i);
+  ```
+
+## Pointers
+
+* Pointer -> memory address, address, reference are equivalent terms
+* **Pointer variable** -> Variable whose value is an address
+    * Informally we call a pointer variable a pointer, but that can be misleading (similar to calling an integer variable an integer)
+* A **pointer variable** has a fixed number of bytes as an address in a system has a fixed number of bytes
+* A **pointer variable stores** the address of the first byte of an int, float, double, etc. Not the whole address; just the address of the first bye
+* **Let’s see a diagram**
+* A pointer variable is defined as follows:
+  ```js
+  <TYPE><ZERO_OR_MORE_SPACES>*<ZERO_OR_MORE_SPACES><VARIABLE_NAME>;
+  ```
+* Example: `int*ip;`
+    * Creates a variable called ip whose type is "pointer to int“
+* All the following are equivalent:
+  ```c
+  int*p; /* no spaces */
+  int* p; /* helps emphasize p is a “variable that stores address of int */
+  int * p;
+  int *p; /* the one we prefer */ /* see man 3 scanf in linux */
+  ```
+
+### Example: `reading.c`
+
+Take a look at this code that shows the usage of pointers
+
+```c
+#include <stdio.h>
+
+int main() {
+   int age, values_read;
+   int* age_ptr = &age;
+   float salary;
+
+   printf("Enter your age and salary (using <age>-<salary> format): ");
+
+   /* This example shows we don't always use & in variables of a scanf */
+   values_read = scanf("%d-%f", age_ptr, &salary);
+   if (values_read != 2) {
+      printf("Invalid data provided\n");
+   } else {
+      printf("Provided values Age: %d, Salary: $%.2f\n", age, salary);
+   }
+
+   return 0;
+}
+```
