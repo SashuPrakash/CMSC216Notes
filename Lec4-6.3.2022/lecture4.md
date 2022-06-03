@@ -144,6 +144,13 @@ You can switch from one cluster by `ssh`ing to another node within the Grace clu
   int * p;
   int *p; /* the one we prefer */ /* see man 3 scanf in linux */
   ```
+* Obtaining the address of an lvalue (&)
+    * Placed before a variable (or an lvalue)
+    * **Returns the address of the first byte**
+* Accessing the entity at an address (*)
+    * Placed before an expression which is either a pointer variable or otherwise evaluates to a pointer
+    * **Returns the entity that lives at the specified address**
+    * Confusing as same symbol (*) used to define a variable as a pointer variable and to dereference
 
 ### Example: `reading.c`
 
