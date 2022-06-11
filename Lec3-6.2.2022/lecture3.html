@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>lecture3.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-2---622022">Lecture 2 - 6/2/2022</h1>
+<h2 id="hidden-files">Hidden Files</h2>
+<p>Hidden files begin with a period. A period represents the current directory. To see hidden files, use this command:</p>
+<pre class="hljs"><code><div>`ls -al`.
+</div></code></pre>
+<ul>
+<li>If you do this in your home directory, you will see that there are many configuration files. In my case, I have all this:<pre class="hljs"><code><div>total 61
+drwxr-xr-x. 8 sprakash users 2048 Jun  2 21:26 .
+drwxr-xr-x. 7 root     mail  2048 May 25  2021 ..
+lrwxr-xr-x. 1 sprakash users   58 May 31 21:41 216 -&gt; /afs/glue/class/summer12022/cmsc/216/0101/student/sprakash
+lrwxr-xr-x. 1 sprakash users   48 May 31 21:41 216public -&gt; /afs/glue/class/summer12022/cmsc/216/0101/public
+-rw-r--r--. 1 sprakash users  282 May 31 22:05 .aliases
+-rw-r--r--. 1 sprakash users  178 May 25  2021 .bash_aliases
+-rw-r--r--. 1 sprakash users  573 May 25  2021 .bash_environment
+-r--r--r--. 1 sprakash users 1538 May 25  2021 .bash_logout
+-rw-r--r--. 1 sprakash users  256 May 25  2021 .bash_logout.mine
+-rw-r--r--. 1 sprakash users  303 May 25  2021 .bash_path
+-r--r--r--. 1 sprakash users 2387 May 25  2021 .bashrc
+-rw-r--r--. 1 sprakash users  353 May 25  2021 .bashrc.mine
+-r--r--r--. 1 sprakash users 2352 May 25  2021 .cshrc
+-rw-r--r--. 1 sprakash users  420 May 31 21:41 .cshrc.mine
+-rw-r--r--. 1 sprakash users 1664 May 25  2021 .dashmenurc
+drwx------. 3 sprakash users 2048 Jun  2 01:57 .dbus
+-rw-r--r--. 1 sprakash users  498 May 25  2021 .emacs
+drwx------. 3 sprakash users 2048 Jun  1 15:49 .emacs.d
+-rw-r--r--. 1 sprakash users  534 May 25  2021 .environment
+-rw-r--r--. 1 sprakash users   95 May 25  2021 .fvwm2rc
+-rw-------. 1 sprakash users  613 Jun  2 21:26 .<span class="hljs-built_in">history</span>
+-rw-r--r--. 1 sprakash users    0 Jun  2 21:26 .hushlogin
+drwxr-xr-x. 3 sprakash users 2048 Mar 16  2006 .kde
+-rw-r--r--. 1 sprakash users   86 May 25  2021 .kermrc
+drwxr-xr-x. 3 sprakash users 2048 May 31 11:34 .<span class="hljs-built_in">local</span>
+-r--r--r--. 1 sprakash users 1761 May 25  2021 .login
+-r--r--r--. 1 sprakash users 1524 May 25  2021 .<span class="hljs-built_in">logout</span>
+-rw-r--r--. 1 sprakash users  258 May 25  2021 .logout.mine
+drwx------. 2 sprakash users 2048 May 25  2021 Mail
+-rw-r--r--. 1 sprakash users   11 May 25  2021 .mh_profile
+-rw-r--r--. 1 sprakash users  370 May 31 21:41 .path
+-r--r--r--. 1 sprakash users 1757 May 25  2021 .profile
+-rw-r--r--. 1 sprakash users  118 May 25  2021 .reqrc
+drwx------. 2 sprakash users 2048 Jun  2 21:25 .ssh
+-rwxr-xr-x. 1 sprakash users  835 May 25  2021 .startup.X
+-rw-r--r--. 1 sprakash users  613 May 25  2021 .twm.menus
+-rw-r--r--. 1 sprakash users 1609 May 25  2021 .twmrc
+-rw-------. 1 sprakash users  912 Jun  2 02:39 .viminfo
+-rw-r--r--. 1 sprakash users  954 May 17  2006 welcome
+-rw-------. 1 sprakash users  481 Jun  2 21:25 .Xauthority
+-rwxr-xr-x. 1 sprakash users 1269 May 25  2021 .xinitrc
+-rwxr-xr-x. 1 sprakash users  132 May 25  2021 .xserverrc
+lrwxr-xr-x. 1 sprakash users    8 May 25  2021 .xsession -&gt; .xinitrc
+</div></code></pre>
+Dang that's a lot of files that I didn't know about.</li>
+</ul>
+<p>The command <code>pwd</code> shows the path of where you are.</p>
+<h2 id="input-and-output">Input and Output</h2>
+<p>Let's create a sample file <code>p1.c</code> such that:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-keyword">int</span> x, y;
+
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;x, &amp;y);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"The values are %d %d\n"</span>, x, y);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>We can compile this program using <code>gcc</code> and run it such that this will be our output:</p>
+<pre class="hljs"><code><div>10 20
+The values are 10 20
+</div></code></pre>
+<h3 id="input-redirection">Input Redirection</h3>
+<p>Let's try to change the input from the user to a file. To do this, lets create a file using the command</p>
+<pre class="hljs"><code><div>vi data.txt
+</div></code></pre>
+<p>Here, we will put this data in:</p>
+<pre class="hljs"><code><div>10 20
+</div></code></pre>
+<p>So now, the file <code>data.txt</code> contains the text <code>10 20</code> that represents our data.</p>
+<p>To run our program using this file as our input, we can run this command:</p>
+<pre class="hljs"><code><div>a.out &lt; data.txt
+</div></code></pre>
+<p>When we do this, our terminal shows:</p>
+<pre class="hljs"><code><div>grace7:~/216: a.out &lt; data.txt
+The values are 10 20
+</div></code></pre>
+<p>Notice I left in the command line to show everything I've done for this run.</p>
+<p>What we have done here is called <strong>input redirection</strong>.</p>
+<h3 id="output-redirection">Output Redirection</h3>
+<p>We can also redirect our ouptut from the CLI to a file. To do this, we could run the program like this:</p>
+<pre class="hljs"><code><div>grace7:~/216: a.out &lt; data.txt &gt; results.txt
+</div></code></pre>
+<p>This way, the program's input is <code>data.txt</code>, and the output goes to a file called <code>results.txt</code>. Using <code>ls</code>, we can see that the file <code>results.txt</code> was created.</p>
+<p>When we run the command</p>
+<pre class="hljs"><code><div>cat results.txt
+</div></code></pre>
+<p>we will see the output of our program in the <code>results.txt</code> file:</p>
+<pre class="hljs"><code><div>grace7:~/216: cat results.txt
+The values are 10 20
+</div></code></pre>
+<p>Note: before we run this program againl, we must remove the <code>results.txt</code> file using this command:</p>
+<pre class="hljs"><code><div>rm results.txt
+</div></code></pre>
+<h2 id="exercise-drawfigures">Exercise: <code>draw_figures</code></h2>
+<p>In <code>216public/exercises/draw_figures/</code>, we see many files.</p>
+<pre class="hljs"><code><div>grace7:~/216public/exercises/draw_figures: ls
+colors_in_c.c    public02.output  public04.output  public06.output
+public01.in      public03.in      public05.in
+public01.output  public03.output  public05.output
+public02.in      public04.in      public06.in
+</div></code></pre>
+<p>These are the files that show the inputs and exptected outputs of our program.</p>
+<p>When we work on this exercise, we can use input and output redirection to run out program like this:</p>
+<pre class="hljs"><code><div>a.out &lt; public01.in &gt; t
+</div></code></pre>
+<p>where t is our output file.</p>
+<h3 id="command-diff">Command: <code>diff</code></h3>
+<p>In our environment, there is a command which can compare two files. Suppose we want to see if a file <code>r</code> is the same as a file <code>public01.out</code>. We can run the command:</p>
+<pre class="hljs"><code><div>diff public01.output r
+</div></code></pre>
+<p>If there is no output from this line, then the two files are identical. Otherwise, it will tell you what the difference is.</p>
+<p>This command will help us to see if the output from our program matches the expected output as shown in files such as <code>public01.output</code> and <code>public02.output</code>.</p>
+<h2 id="transfer-files-to-and-from-grace">Transfer Files to and from Grace</h2>
+<p>In MobaXTerm, you can transfer files to and from Grace by using the <code>SFTP</code> feature. Do this by:</p>
+<ul>
+<li>Go to <code>Sessions</code> dropdown in the menu bar</li>
+<li>Hit <code>New Session</code></li>
+<li>Click <code>SFTP</code></li>
+<li>After logging in this way, you will see that you can drag and drop files like Windows File Explorer</li>
+</ul>
+<p>Mac Users can use transfer files using another protocol.'</p>
+<h3 id="file-transfer-protocol-scp-secure-copy">File Transfer Protocol: <code>scp</code> (secure copy)</h3>
+<p>I use <code>scp</code> to copy files through SSH on different machines. To do this on Grace, open a terminal on your local machine. Enter a command that follows this structure:</p>
+<pre class="hljs"><code><div>scp -P 22 sprakash@grace.umd.edu:~/216/p1.c ./Desktop/p1.c
+</div></code></pre>
+<p>obiously, change my username to yours, the path of the file to the path of your file, the name of the file to the name of your file, and the path for where you want the file to wherever you wish for it to be.</p>
+<p>Alternatively, you can open your local terminal in wherever you want the file to go. Then you don't need to write the path for where you want the file to go, only the file name.</p>
+<p>For example, this also works:</p>
+<pre class="hljs"><code><div>C:\Users\Sashu\Desktop&gt;scp -P 22 sprakash@grace.umd.edu:~/216/p1.c p1.c
+</div></code></pre>
+<h2 id="why-you-want-to-develop-your-own-code">Why you want to develop your own code?</h2>
+<p>Copied from <code>C-Language-III.pdf</code> slides</p>
+<ul>
+<li>“Company TA” - Remember there is no such thing as the “company ta” you need to develop the skills you will need later on (both for classes and future employer)</li>
+<li>Constant Help - It is OK to be assisted by TAs, but if you are constantly asking for TA help it is best if you talk to us to address any problems you might be experiencing</li>
+<li>Debug Your Own Programs - You are expected to debug your own programs. We will help you, but you need to do most of the work</li>
+<li>Skills Will Develop The More Independent You Are - Your programming skills will increase as you rely less and less on TAs</li>
+<li>Exams and quizzes will have questions based on your projects. If you don’t complete the projects by yourself you will not be able to answer those questions</li>
+<li>Please read the information available <a href="http://www.cs.umd.edu/~nelson/classes/resources/writingComputerPrograms/">here</a>.</li>
+</ul>
+<h2 id="incremental-code-development">Incremental code development</h2>
+<p>Copied from <code>C-Language-III.pdf</code> slides</p>
+<ul>
+<li><strong>Most important rule for code development</strong> – Regardless of the language you are using, <strong>incremental code development</strong> (add code, test, then add more) it is extremely important</li>
+<li>You will know if you are following incremental code development if you
+can answer the following questions:
+<ol>
+<li>Up to what point my code was working?</li>
+<li>What did I added that just made my code stop working?</li>
+</ol>
+</li>
+<li>Compiler can generate errors that are hard to interpret</li>
+<li>Look at the number of errors for the following program when compiled using the gcc settings for the course</li>
+</ul>
+<h3 id="example-errorc">Example: <code>error.c</code></h3>
+<p>This example code shows why incremental code development is important.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Mary</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Done\n"</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>When we compile this code using <code>gcc</code>, it outputs several large error messages. It's difficult to comprehend all this, so if we made sure to test our program at each increment of development, we can find the cause of problems easier, since not much will have changed.</p>
+<h2 id="comma-operator">Comma operator</h2>
+<p>Copied from <code>C-Language-III.pdf</code> slides</p>
+<ul>
+<li>Yes, the comma is an operator</li>
+<li>Evaluates left operand, then right operand</li>
+<li>Value of expression with commas is the value of the last operand</li>
+<li>Comma operator has lowest precedence of all operators</li>
+<li>For the following code, what gets stored in <code>i</code> after each statement? What does each statement evaluate to?<pre class="hljs"><code><div>i = 1, 2, 3, 4;
+i = (1, 2, 3, 4);
+</div></code></pre>
+</li>
+</ul>
+<h3 id="example-commaopc">Example: <code>comma_op.c</code></h3>
+<p>Take a look at this code which shows what the comma operator does:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+   <span class="hljs-keyword">int</span> i, j = <span class="hljs-number">2</span>, k = <span class="hljs-number">3</span>;
+
+   i = (<span class="hljs-number">1</span>, ++j, ++k);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"i: %d\n"</span>, i);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"j: %d\n"</span>, j);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"k: %d\n"</span>, k);
+
+   <span class="hljs-comment">/* Resetting j, k */</span>
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\nWithout parentheses\n"</span>);
+   j = <span class="hljs-number">2</span>;
+   k = <span class="hljs-number">3</span>;
+   i = <span class="hljs-number">1</span>, ++j, ++k;
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"i: %d\n"</span>, i);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"j: %d\n"</span>, j);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"k: %d\n"</span>, k);
+
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>As you can see, the line</p>
+<pre class="hljs"><code><div>i = (<span class="hljs-number">1</span>, ++j, ++k);
+</div></code></pre>
+<p>Has three instructions, separated by commas, and this is somehow evaluated to a value that is given to <code>i</code>. The comma operator returns the value of the last expression, in this case, <code>++k</code>. So, <code>i</code> will have whatever value results from <code>++k</code>.</p>
+<p>On the other hand, when used without parenthasis such as</p>
+<pre class="hljs"><code><div>i = <span class="hljs-number">1</span>, ++j, ++k;
+</div></code></pre>
+<p><code>i</code> is given the value of 1, and the other statements also run. The values of those statements are useless in that line because <code>i</code> is not affected by them.</p>
+<h2 id="c-program-memory-organization">C Program memory organization</h2>
+<p>Copied from <code>C-Language-III.pdf</code> slides</p>
+<p><img src="Context_the_heap_segment.jpg" alt=""></p>
+<h2 id="identifier-scope">Identifier scope</h2>
+<ul>
+<li>C has two main types of scope
+<ul>
+<li><strong>Block scope</strong>: a variable declared inside a block is visible only within the block (includes nested blocks inside that block)</li>
+<li><strong>File scope</strong>: an identifier declared outside of any block is visible everywhere in the file after the declaration</li>
+</ul>
+</li>
+<li>A <strong>Global variable</strong> is a variable defined outside of a function with file scope
+<ul>
+<li>Avoid them; use them only if absolutely necessary</li>
+<li>Global variables are initialized by default to 0</li>
+</ul>
+</li>
+<li>Scope applies both to global variables and function names
+<ul>
+<li>A function is visible from its point of definition on</li>
+</ul>
+</li>
+</ul>
+<h3 id="example-globalc">Example: <code>global.c</code></h3>
+<p>Let's take a look at this example code:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-comment">/* Notice the global variables convention (g_) */</span>
+<span class="hljs-keyword">int</span> g_years = <span class="hljs-number">10</span>;  <span class="hljs-comment">/* What if we don't initialize it? */</span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">process</span><span class="hljs-params">()</span> </span>{
+   <span class="hljs-comment">/* Following printf will not compile */</span>
+   <span class="hljs-comment">/* printf("g_salary in process() %f\n", g_salary); */</span>
+   g_years++;
+}
+
+<span class="hljs-keyword">double</span> g_salary = <span class="hljs-number">3000.00</span>; <span class="hljs-comment">/* Visible from this point on */</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"g_years before process() call: %d\n"</span>, g_years);
+   <span class="hljs-built_in">process</span>();
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"g_years after process() call: %d\n"</span>, g_years);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"g_salary in main() %f\n"</span>, g_salary);
+
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>A global variable is visible during the entire duration of the program, once it is declared. Notice <code>g_years</code> is a global variable, and it's named using <code>g_</code> by convention.</p>
+<ul>
+<li>The code will not compile if <code>process()</code> tried to access <code>g_salary</code> because global variables are only visible from their point of declaration onwards.</li>
+<li>The default variable for a global variable is <code>0</code>, whereas the default value for a local variable is garbage.</li>
+<li>Global variables are file scope.</li>
+</ul>
+<h2 id="storage">Storage</h2>
+<p>Copied from <code>C-Language-III.pdf</code> slides</p>
+<ul>
+<li>How long is memory allocated for a variable?</li>
+<li>After the following function returns, is there any guarantee that the value 5 will stay at the spot in memory at which it was stored?<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">example</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>{
+  <span class="hljs-keyword">int</span> j = <span class="hljs-number">5</span>;
+  <span class="hljs-keyword">return</span> i + j;
+}
+</div></code></pre>
+</li>
+<li>There are two types of storage:
+<ul>
+<li><strong>Automatic</strong>: the previous variable j has automatic storage, meaning it is no longer maintained after its function returns
+<ul>
+<li>Default for block-scoped variables</li>
+</ul>
+</li>
+<li><strong>Static</strong>: variable exists throughout the entire life of the program
+<ul>
+<li>Global variables have this kind of storage</li>
+<li>Initializations to static variables occur only once</li>
+<li>We can make block-scoped variables static</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="example-staticc">Example: <code>static.c</code></h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">compute_automatic</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">compute_static</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">compute_automatic</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>{
+   <span class="hljs-keyword">int</span> value = <span class="hljs-number">100</span>;
+
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"(automatic) x: %d, value: %d, sum: %d \n"</span>, x, value, value + x);
+
+   ++value;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">compute_static</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>{
+   <span class="hljs-comment">/* Initialization to a 100 will take place only once, when the */</span>
+   <span class="hljs-comment">/* function is called the first time */</span>
+   <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> value = <span class="hljs-number">100</span>; <span class="hljs-comment">/* What would happen if we don't initialize it? */</span>
+
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"(static) x: %d, value: %d, sum: %d \n"</span>, x, value, value + x);
+
+   ++value;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+   compute_automatic(<span class="hljs-number">1</span>);
+   compute_automatic(<span class="hljs-number">1</span>); <span class="hljs-comment">/* calling function again */</span>
+
+   compute_static(<span class="hljs-number">1</span>);
+   compute_static(<span class="hljs-number">1</span>); <span class="hljs-comment">/* calling function again */</span>
+
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>It's important to note that the line</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> value = <span class="hljs-number">100</span>;
+</div></code></pre>
+<p>will only run once. So, if the function <code>compute_static</code> is called a second time, the value of <code>value</code> will be 101, not 101.</p>
+<ul>
+<li>For this reason, it's recommended to avoid using this in general, although there may be some justified ways to use it.</li>
+</ul>
+<h2 id="identifier-linkage">Identifier linkage</h2>
+<p>Copied from <code>C-Language-III.pdf</code> slides</p>
+<ul>
+<li>What happens if we encounter two instances of the same identifier across different files?</li>
+<li>A function named <code>foo()</code> in <code>file1.c</code> can cause problems if there's a function named <code>foo()</code> in <code>file2.c</code></li>
+<li>We can resolve these types of conflicts by changing the linkage of the functions</li>
+<li><strong>Linkage</strong>:
+<ul>
+<li>A property of an identifier that determines if multiple declarations of that identifier refer to the same object</li>
+<li>Extent to which an identifier (e.g., variable or function name) can be shared by different parts of a program</li>
+</ul>
+</li>
+<li>To better understand linkage, let’s see how we can organize C code across several C file
+<ul>
+<li>Example: linkage_example/functions directory
+<ul>
+<li>Why we want to split code across several files?</li>
+</ul>
+</li>
+<li>Example: linkage_example/variables directory</li>
+</ul>
+</li>
+</ul>
+<h3 id="example-functions">Example: <code>functions</code></h3>
+<p>Let's take a look at the directory <code>functions</code> in <code>linkage_example</code>:</p>
+<pre class="hljs"><code><div>grace10:~/&lt;2&gt;Week01/C-Language-III-Code/linkage_example/<span class="hljs-built_in">functions</span>: ls
+main.c  README.txt  support.c
+</div></code></pre>
+<p>Here, let's <code>cat</code> <code>README.txt</code> to see its contents. Reading <code>README</code> files can be beneficial because they are meant to be read before the use of a software.</p>
+<pre class="hljs"><code><div>grace10:~/&lt;2&gt;Week01/C-Language-III-Code/linkage_example/<span class="hljs-built_in">functions</span>: cat README.txt
+To compile:
+
+gcc main.c support.c
+</div></code></pre>
+<p>This <code>README</code> file gives some information on how to compile the code.</p>
+<p>Before we do so, lets take a look at the file <code>support.c</code>:</p>
+<pre class="hljs"><code><div>grace10:~/&lt;2&gt;Week01/C-Language-III-Code/linkage_example/<span class="hljs-built_in">functions</span>: cat support.c
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-comment">/*
+ * 1. What happens if you add static at the beginning?
+ * 2. What happens if you add extern?
+ *
+ */</span>
+
+<span class="hljs-comment">/* Function definition */</span>
+<span class="hljs-comment">/* Prints sum of value from 1 up to limit */</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print_sum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> limit)</span> </span>{
+   <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>, k = <span class="hljs-number">1</span>;
+
+   <span class="hljs-keyword">while</span> (k &lt;= limit) {
+      sum += k;
+
+      k++;
+   }
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"The sum of %d is %d\n"</span>, limit, sum);
+}
+</div></code></pre>
+<p>This file has a function <code>print_sum</code> which prints a the sum of values from 1 to a <code>limit</code>.</p>
+<p>Now, lets take a look at  the file <code>main.c</code>.</p>
+<ul>
+<li>This file can be named anything, but it's called <code>main.c</code> for the purposes of this example</li>
+</ul>
+<pre class="hljs"><code><div>grace10:~/&lt;2&gt;Week01/C-Language-III-Code/linkage_example/<span class="hljs-built_in">functions</span>: cat main.c
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-comment">/*
+ * 1. What happens if you add static at the beginning of the prototype?
+ * 2. What happens if you add extern at the beginning of the prototype?
+ * 3. What happens if you remove the prototype?
+ */</span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print_sum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> limit)</span></span>; <span class="hljs-comment">/* Prototype */</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+   print_sum(<span class="hljs-number">4</span>);
+
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>This file makes use of the <code>print_sum</code> funciton defined in the other file.</p>
+<p>To make this work, we must compile using the information provided in the <code>README.txt</code> file.</p>
+<pre class="hljs"><code><div>gcc main.c support.c
+</div></code></pre>
+<p>Then, if we run the outputted <code>a.out</code>, we'll see that we get this output:</p>
+<pre class="hljs"><code><div>The sum of 4 is 10
+</div></code></pre>
+<p>The program worked as expected. What did <code>gcc</code> do?</p>
+<ul>
+<li><code>gcc</code> is not also a compiler, but also a linker. In Nelson's terms, it takes all the ingredients and stirs them in the pot.</li>
+<li>The linker finds the code for <code>printf()</code> if it is needed.</li>
+<li>The compiler generated machine code for each file, then links them together.</li>
+</ul>
+<p>Let's continue looking at the file <code>main.c</code>.</p>
+<ul>
+<li>We see that we have a prototype:<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print_sum</span><span class="hljs-params">( <span class="hljs-keyword">int</span> limit)</span></span>; <span class="hljs-comment">/* Prototype */</span>
+</div></code></pre>
+<ul>
+<li>This prototype tells us and the compiler that there is a function elsewhere called <code>print_sum</code> that has this signature.</li>
+</ul>
+</li>
+<li>By default, functions have an external linkage, which means that such functions in one file can be accessed from any other file.
+<ul>
+<li>So, the functions in <code>support.c</code> can be accessed by <code>main.c</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Suppose, in <code>support.c</code>, we added the keyword <code>static</code> to <code>print_sum</code> such that <code>support.c</code> looks something like this:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print_sum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> limit)</span> </span>{
+   <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>, k = <span class="hljs-number">1</span>;
+
+   <span class="hljs-keyword">while</span> (k &lt;= limit) {
+      sum += k;
+
+      k++;
+   }
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"The sum of %d is %d\n"</span>, limit, sum);
+}
+</div></code></pre>
+<p>Now, if we compile the code, we get an error:</p>
+<pre class="hljs"><code><div>gcc main.c support.c
+support.c:11:13: warning: `print_sum` defined but not used [-Wunused-function]
+
+  static void print_sum( int <span class="hljs-built_in">limit</span>) {
+              ^
+/tmp/ccAjuXHRs.o: In <span class="hljs-keyword">function</span> `main`:
+/afs/glue.umd.edu/.../<span class="hljs-built_in">functions</span>/main.c:12: undefined reference to <span class="hljs-string">'print_sum'</span>
+collect2: error: ld returned 1 <span class="hljs-built_in">exit</span> status
+</div></code></pre>
+<p>As we can see, main is calling <code>print_sum</code> but there is no <code>print_sum</code> that is accessible by it.</p>
+<p>To make <code>print_sum</code> accessible externally, we give it the default keyword <code>extern</code> such that <code>support.c</code> looks like this:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">extern</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print_sum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> limit)</span> </span>{
+   <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>, k = <span class="hljs-number">1</span>;
+
+   <span class="hljs-keyword">while</span> (k &lt;= limit) {
+      sum += k;
+
+      k++;
+   }
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"The sum of %d is %d\n"</span>, limit, sum);
+}
+</div></code></pre>
+<p>It's important to note that the <code>extern</code> keyword is the default visibility assigned to functions, so there is no need to write it at all in the signature of a function.</p>
+<p>With this or the default signature, the code compiles and runs properly.</p>
+<p>The use of <code>static</code> functions in C is similar to the use of <code>private</code> functions in Java, where we need to use functions as supports without them being visible/useable by users.</p>
+<h3 id="example-variables">Example: <code>variables</code></h3>
+<p>Similar to linkages in functions, we can address linkages in the context of variables</p>
+<p>Let's take a look at the <code>variables</code> directory in <code>linkage_example</code>:</p>
+<pre class="hljs"><code><div>grace10:~/&lt;2&gt;Week01/C-Language-III-Code/linkage_example/variables: ls
+main.c  README.txt  support.c
+</div></code></pre>
+<p>Let's take a look at the file called <code>main.c</code></p>
+<pre class="hljs"><code><div>grace10:~/&lt;2&gt;Week01/C-Language-III-Code/linkage_example/variables: cat main.c
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-comment">/*
+ * 1. What happens if we remove extern?
+ * 2. What happens if we assign a value to g_computers ?
+ * 3. What happens if we assign a value to g_computers having a extern?
+ * 4. What if we remove the extern and assign a value to g_computers?
+ */</span>
+
+<span class="hljs-comment">/* Declaration */</span>
+<span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> g_computers;
+
+<span class="hljs-comment">/* Function prototype */</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">process</span><span class="hljs-params">()</span></span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Before calling process %d\n"</span>, g_computers);
+   <span class="hljs-built_in">process</span>();
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"After calling process %d\n"</span>, g_computers);
+
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>The line:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> g_comptuers;
+</div></code></pre>
+<p>looks like a global variable, but to see what it's doing, let's wee what the program is doing.</p>
+<p>The program has a function called <code>process()</code>, which isn't in <code>main.c</code>. It's in <code>support.c</code>, so let's take a look at that too:</p>
+<pre class="hljs"><code><div>grace10:~/&lt;2&gt;Week01/C-Language-III-Code/linkage_example/variables: cat support.c
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-comment">/* When you assign a value you define the variable */</span>
+<span class="hljs-keyword">int</span> g_computers = <span class="hljs-number">200</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">process</span><span class="hljs-params">()</span> </span>{
+   g_computers++;
+}
+</div></code></pre>
+<p>Here, we see that the function increases the global variable <code>g_computers</code> by 1 everytime it is called.</p>
+<p>In C, when we give a variable a value, we are &quot;defining&quot; it, which means we allocate space in memory for it.</p>
+<p>The terms</p>
+<ul>
+<li>Declaration</li>
+<li>Definition</li>
+</ul>
+<p>are different.</p>
+<p>Let's revisit the <code>main.c</code> code. We can see that the lines</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Declaration */</span>
+<span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> g_computers;
+</div></code></pre>
+<p>Declare there to be an <code>int</code> variable called <code>g_computers</code>. However, the word <code>extern</code> makes this declaration such that the variable is defined elsewhere - in this case, in <code>support.c</code>. The linker will take care of this linkage.</p>
+<p>Suppose we changed <code>support.c</code> and added <code>static</code> to the defined variable, <code>g_computers</code>. The file would look something like this:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> g_computers = <span class="hljs-number">200</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">process</span><span class="hljs-params">()</span> </span>{
+   g_computers++;
+}
+</div></code></pre>
+<p>And now, the code will not compile. The compiler will throw an error such as this:</p>
+<pre class="hljs"><code><div>gcc *.c
+
+/tmp/...: In <span class="hljs-keyword">function</span> `main`:
+/afs/glue.umd.edu/.../variables/main.c:19: undefined reference to ;<span class="hljs-string">'g_computers'</span>
+collect2: error: ld returned 1 <span class="hljs-built_in">exit</span> status
+</div></code></pre>
+<p>Let's see what this error message means.</p>
+<ul>
+<li>In function main, we have an &quot;undefined referece to <code>g_computers</code>.
+<ul>
+<li>This means that although there is an <code>extern</code> <strong>declaration</strong>, it has not been <strong>defined</strong>.</li>
+</ul>
+</li>
+<li>collect2: error: ld
+<ul>
+<li><code>ld</code> is the linker. Since it reterned an <code>exit</code> status, we can see that it was unable to complete its linkages.</li>
+</ul>
+</li>
+</ul>
+<p>Some things to note:</p>
+<ul>
+<li>If we were to change<pre class="hljs"><code><div><span class="hljs-keyword">int</span> g_computers = <span class="hljs-number">200</span>;
+</div></code></pre>
+to<pre class="hljs"><code><div><span class="hljs-keyword">int</span> g_computers;
+</div></code></pre>
+our output would change to reflect that global variables are initialized with the value of 0. The program would still work, but it will start at 0 instead of 200.</li>
+<li>If we were to remove <code>extern</code> from<pre class="hljs"><code><div><span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> g_computers;
+</div></code></pre>
+the program will still work the same way, since <code>extern</code> is used by default even if it's not added there by the programmer.</li>
+<li>If we made <code>main.c</code> to have<pre class="hljs"><code><div><span class="hljs-comment">/* Declaration */</span>
+<span class="hljs-keyword">int</span> g_computers = <span class="hljs-number">10</span>;
+</div></code></pre>
+<strong>AND</strong>
+support.c to have:<pre class="hljs"><code><div><span class="hljs-keyword">int</span> g_computer = <span class="hljs-number">20</span>;
+</div></code></pre>
+When we compile the program, we will get this error:<pre class="hljs"><code><div>gcc *.c
+/tmp/...:(.data+0x0): multiple definition of `g_computers`
+/tmp/...:    ...    : first defined here
+collect2: errpr: ld retured 1 <span class="hljs-built_in">exit</span> status
+</div></code></pre>
+This shows that by setting a value, we are defining.</li>
+</ul>
+<h2 id="interesting-nelson-quote">Interesting Nelson Quote:</h2>
+<p>&quot;This class is brought to you by Starbucks&quot; - Nelson.</p>
+<h2 id="interesting-unix-commands">Interesting Unix Commands:</h2>
+<p>Here are some interesting Unix commands that can be used.</p>
+<h3 id="finger"><code>finger</code></h3>
+<p>The command <code>finger</code> lets you <code>finger</code> someone on a server such that you can get some information about their user.</p>
+<p>For example, if I were to <code>finger</code> myself:</p>
+<pre class="hljs"><code><div>grace10:~: finger sprakash
+Login: sprakash                         Name: Sashwath Prakash
+Directory: /afs/glue.umd.edu/home/glue/s/p/sprakash/home        Shell: /bin/tcsh
+On since Fri Jun 10 02:56 (EDT) on pts/0 from [REDACTED IP]
+   7 seconds idle
+No mail.
+No Plan.
+</div></code></pre>
+<h3 id="ps"><code>ps</code></h3>
+<p>The <code>ps</code>, or process command, lets you see what processes someone is running. For example, you can use this with the flags <code>-fu</code> to see what someone is doing:</p>
+<pre class="hljs"><code><div>grace10:~: ps -fu sprakash
+UID        PID  PPID  C STIME TTY          TIME CMD
+sprakash  7052  7035  0 02:56 ?        00:00:00 sshd: sprakash@pts/0
+sprakash  7057  7052  0 02:56 pts/0    00:00:00 -tcsh
+sprakash 22405  7057  0 04:17 pts/0    00:00:00 ps -fu sprakash
+</div></code></pre>
+<p>To see all the processes on the system, we can use</p>
+<pre class="hljs"><code><div>grace10:~: ps -e
+  PID TTY          TIME CMD
+    1 ?        02:55:24 systemd
+    2 ?        00:00:30 kthreadd
+    4 ?        00:00:00 kworker/0:0H
+    6 ?        00:03:16 ksoftirqd/0
+    .
+    .
+    .
+</div></code></pre>
+<h3 id="who-am-i"><code>who am i</code></h3>
+<p>This command tells you who you are</p>
+<pre class="hljs"><code><div>grace10:~: who am i
+sprakash pts/0        2022-06-10 02:56 (REDACTED IP)
+</div></code></pre>
+<h3 id="who"><code>who</code></h3>
+<p>This command tells you who is on the same machine as you</p>
+<pre class="hljs"><code><div>grace10:~: who
+sprakash pts/0        2022-06-10 02:56 (REDACTED IP)
+ishi     pts/1        2022-06-09 23:27 (REDACTED IP)
+</div></code></pre>
+<h3 id="cal"><code>cal</code></h3>
+<p>This command gives you a nice looking calendar</p>
+<pre class="hljs"><code><div>grace10:~: cal
+      June 2022
+Su Mo Tu We Th Fr Sa
+          1  2  3  4
+ 5  6  7  8  9 <span class="hljs-string">'10'</span> 11
+12 13 14 15 16 17 18
+19 20 21 22 23 24 25
+26 27 28 29 30
+</div></code></pre>
+<p>But the date is somehow highlighted on an ssh client.</p>
+<h3 id="date"><code>date</code></h3>
+<p>This command tells you the date</p>
+<pre class="hljs"><code><div>grace10:~: date
+Fri Jun 10 04:24:46 EDT 2022pep 
+</div></code></pre>
+<h3 id="mesg-y"><code>mesg y</code></h3>
+<p>Lets you enable your messages</p>
+<h3 id="write-user"><code>write $user</code></h3>
+<p>Lets you write to a user by replacigng <code>$user</code> with their username.</p>
+<h2 id="enumerated-types">Enumerated types</h2>
+<p>Back to learning about C</p>
+<ul>
+<li>We can use these to represent things that only take on certain values</li>
+<li>Values equalt to 0, 1, 2... based on order of definition.</li>
+<li>Values can be set by programmer to things other than 0, 1, 2...</li>
+<li>Based on intergers, but don't mix enums with intergers unless absolutely necessary.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">enum</span> Suit {
+        SPADES, HEARTS,
+        DIAMONDS = <span class="hljs-number">42</span>, CLUBS
+    };
+
+    <span class="hljs-keyword">enum</span> Suit suit1, suit2;
+
+    suit1 = SPADES;
+
+    suit2 = CLUBS;
+
+    <span class="hljs-keyword">if</span> (suit1 &lt; suit2)
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Spades are furst.\n"</span>);
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Clubs are first.\n"</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Spades = %d, Clubs = %d\n"</span>, suit1, suit2);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>You'll see that <code>SPADES = 1</code>, and <code>CLUBS = 43</code>.</p>
+<h2 id="lvalues-and-rvalues">Lvalues and Rvalues</h2>
+<ul>
+<li>An <code>rvalue</code> is anything that can appear on the right side of an assignment statement
+<ul>
+<li>Virtually any expression</li>
+</ul>
+</li>
+<li>An <code>lvalue</code> is anything that can appear on the left side of an assignment statement
+<ul>
+<li>Values that represent a place to store a values (e.g., variables, array entry)</li>
+</ul>
+</li>
+<li>The right and left sides of an assignment statement are treated differently.
+<ul>
+<li>Right hadn side is a value, left hadn side is a location to store a value (an address)</li>
+</ul>
+</li>
+</ul>
+<h2 id="typecasting">Typecasting</h2>
+<ul>
+<li>In c, we can have <strong>explicit</strong> and <strong>implicit</strong> type conversions.</li>
+<li>We can have explicit conversion using casting:<pre class="hljs"><code><div><span class="hljs-keyword">float</span> f = <span class="hljs-number">3.45</span>;
+<span class="hljs-keyword">int</span> x = (<span class="hljs-keyword">int</span>)f;
+</div></code></pre>
+</li>
+<li>C performs integer promotions
+<ul>
+<li>Small integer types (e.g., <strong>char</strong>, <strong>short</strong>) in expression sare converted to <strong>int</strong>.</li>
+</ul>
+</li>
+<li>Arithmetic operators require their operands to be of same type to perform the operation.
+<ul>
+<li>C ompiler performs type conversios automatically (<strong>implicit type conversions</strong>) when an expression involves different types.</li>
+</ul>
+</li>
+<li>When two operands of different types are involved in an expression, the lower rank operand will be converted to the data type of the higher rank. For example, if we have a double and a float expression, the float will be converted to a double. The following types are ordered from high to low rank:
+<ul>
+<li>long double</li>
+<li>double</li>
+<li>float</li>
+<li>unsigned long int</li>
+<li>long int</li>
+<li>unsigned int</li>
+<li>int</li>
+<li>char, short</li>
+</ul>
+</li>
+<li><a href="https://overiq.com/c-programming-101/implicit-type-conversion-in-c">Reference</a></li>
+<li>Note: <code>char</code> and <code>short</code> is converted to <code>int</code>, then it is compared to the other.</li>
+<li>Implicit casting also takes place during assignments and when calling a function with an argument that does not match the parameter</li>
+<li>Be careful and avoid mixing types unless you are sure is safe.</li>
+<li>Do not ignore compiler warnings and pay attention to messages generated by tools</li>
+</ul>
+
+</body>
+</html>

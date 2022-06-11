@@ -309,13 +309,15 @@ Copied from `C-Language-III.pdf` slides
 * C has two main types of scope
     * **Block scope**: a variable declared inside a block is visible only within the block (includes nested blocks inside that block)
     * **File scope**: an identifier declared outside of any block is visible everywhere in the file after the declaration
-* **Global variable** – variable defined outside of a function with file scope
+* A **Global variable** is a variable defined outside of a function with file scope
     * Avoid them; use them only if absolutely necessary
     * Global variables are initialized by default to 0
 * Scope applies both to global variables and function names
     * A function is visible from its point of definition on
 
 ### Example: `global.c`
+
+Let's take a look at this example code:
 
 ``` c
 #include <stdio.h>
@@ -340,9 +342,10 @@ int main() {
    return 0;
 }
 ```
-
-Notice `g_years` is a global variable, and it's named using `g_` by convention.
+A global variable is visible during the entire duration of the program, once it is declared. Notice `g_years` is a global variable, and it's named using `g_` by convention.
+* The code will not compile if `process()` tried to access `g_salary` because global variables are only visible from their point of declaration onwards.
 * The default variable for a global variable is `0`, whereas the default value for a local variable is garbage.
+* Global variables are file scope.
 
 ## Storage
 
@@ -423,3 +426,472 @@ Copied from `C-Language-III.pdf` slides
     * Example: linkage_example/functions directory
         * Why we want to split code across several files?
     * Example: linkage_example/variables directory
+
+### Example: `functions`
+
+Let's take a look at the directory `functions` in `linkage_example`:
+
+``` bash
+grace10:~/<2>Week01/C-Language-III-Code/linkage_example/functions: ls
+main.c  README.txt  support.c
+```
+
+Here, let's `cat` `README.txt` to see its contents. Reading `README` files can be beneficial because they are meant to be read before the use of a software.
+
+``` Bash
+grace10:~/<2>Week01/C-Language-III-Code/linkage_example/functions: cat README.txt
+To compile:
+
+gcc main.c support.c
+```
+
+This `README` file gives some information on how to compile the code. 
+
+Before we do so, lets take a look at the file `support.c`:
+
+``` bash
+grace10:~/<2>Week01/C-Language-III-Code/linkage_example/functions: cat support.c
+```
+```c
+#include <stdio.h>
+
+/*
+ * 1. What happens if you add static at the beginning?
+ * 2. What happens if you add extern?
+ *
+ */
+
+/* Function definition */
+/* Prints sum of value from 1 up to limit */
+void print_sum(int limit) {
+   int sum = 0, k = 1;
+
+   while (k <= limit) {
+      sum += k;
+
+      k++;
+   }
+   printf("The sum of %d is %d\n", limit, sum);
+}
+```
+This file has a function `print_sum` which prints a the sum of values from 1 to a `limit`.
+
+Now, lets take a look at  the file `main.c`.
+* This file can be named anything, but it's called `main.c` for the purposes of this example
+
+``` bash
+grace10:~/<2>Week01/C-Language-III-Code/linkage_example/functions: cat main.c
+```
+```c
+#include <stdio.h>
+
+/*
+ * 1. What happens if you add static at the beginning of the prototype?
+ * 2. What happens if you add extern at the beginning of the prototype?
+ * 3. What happens if you remove the prototype?
+ */
+
+void print_sum(int limit); /* Prototype */
+
+int main() {
+   print_sum(4);
+
+   return 0;
+}
+```
+
+This file makes use of the `print_sum` funciton defined in the other file.
+
+To make this work, we must compile using the information provided in the `README.txt` file.
+
+``` bash
+gcc main.c support.c
+```
+
+Then, if we run the outputted `a.out`, we'll see that we get this output:
+
+```
+The sum of 4 is 10
+```
+
+The program worked as expected. What did `gcc` do?
+* `gcc` is not also a compiler, but also a linker. In Nelson's terms, it takes all the ingredients and stirs them in the pot.
+* The linker finds the code for `printf()` if it is needed.
+* The compiler generated machine code for each file, then links them together.
+
+Let's continue looking at the file `main.c`.
+* We see that we have a prototype:
+  ``` c
+  void print_sum( int limit); /* Prototype */
+  ```
+    * This prototype tells us and the compiler that there is a function elsewhere called `print_sum` that has this signature.
+* By default, functions have an external linkage, which means that such functions in one file can be accessed from any other file.
+    * So, the functions in `support.c` can be accessed by `main.c`.
+
+Suppose, in `support.c`, we added the keyword `static` to `print_sum` such that `support.c` looks something like this:
+```c
+#include <stdio.h>
+static void print_sum(int limit) {
+   int sum = 0, k = 1;
+
+   while (k <= limit) {
+      sum += k;
+
+      k++;
+   }
+   printf("The sum of %d is %d\n", limit, sum);
+}
+```
+
+Now, if we compile the code, we get an error:
+
+```bash
+gcc main.c support.c
+support.c:11:13: warning: `print_sum` defined but not used [-Wunused-function]
+
+  static void print_sum( int limit) {
+              ^
+/tmp/ccAjuXHRs.o: In function `main`:
+/afs/glue.umd.edu/.../functions/main.c:12: undefined reference to 'print_sum'
+collect2: error: ld returned 1 exit status
+```
+
+As we can see, main is calling `print_sum` but there is no `print_sum` that is accessible by it. 
+
+To make `print_sum` accessible externally, we give it the default keyword `extern` such that `support.c` looks like this:
+
+```c
+#include <stdio.h>
+extern void print_sum(int limit) {
+   int sum = 0, k = 1;
+
+   while (k <= limit) {
+      sum += k;
+
+      k++;
+   }
+   printf("The sum of %d is %d\n", limit, sum);
+}
+```
+It's important to note that the `extern` keyword is the default visibility assigned to functions, so there is no need to write it at all in the signature of a function.
+
+With this or the default signature, the code compiles and runs properly. 
+
+The use of `static` functions in C is similar to the use of `private` functions in Java, where we need to use functions as supports without them being visible/useable by users.
+
+### Example: `variables`
+
+Similar to linkages in functions, we can address linkages in the context of variables
+
+Let's take a look at the `variables` directory in `linkage_example`:
+
+``` bash
+grace10:~/<2>Week01/C-Language-III-Code/linkage_example/variables: ls
+main.c  README.txt  support.c
+```
+
+Let's take a look at the file called `main.c`
+
+``` bash
+grace10:~/<2>Week01/C-Language-III-Code/linkage_example/variables: cat main.c
+```
+```c
+#include <stdio.h>
+
+/*
+ * 1. What happens if we remove extern?
+ * 2. What happens if we assign a value to g_computers ?
+ * 3. What happens if we assign a value to g_computers having a extern?
+ * 4. What if we remove the extern and assign a value to g_computers?
+ */
+
+/* Declaration */
+extern int g_computers;
+
+/* Function prototype */
+void process();
+
+int main() {
+   printf("Before calling process %d\n", g_computers);
+   process();
+   printf("After calling process %d\n", g_computers);
+
+   return 0;
+}
+```
+
+The line:
+```c
+extern int g_comptuers;
+```
+looks like a global variable, but to see what it's doing, let's wee what the program is doing.
+
+The program has a function called `process()`, which isn't in `main.c`. It's in `support.c`, so let's take a look at that too:
+
+``` bash
+grace10:~/<2>Week01/C-Language-III-Code/linkage_example/variables: cat support.c
+``` 
+```c
+#include <stdio.h>
+
+/* When you assign a value you define the variable */
+int g_computers = 200;
+
+void process() {
+   g_computers++;
+}
+```
+
+Here, we see that the function increases the global variable `g_computers` by 1 everytime it is called.
+
+In C, when we give a variable a value, we are "defining" it, which means we allocate space in memory for it.
+
+The terms
+
+* Declaration
+* Definition
+
+are different.
+
+Let's revisit the `main.c` code. We can see that the lines
+
+```c
+/* Declaration */
+extern int g_computers;
+```
+
+Declare there to be an `int` variable called `g_computers`. However, the word `extern` makes this declaration such that the variable is defined elsewhere - in this case, in `support.c`. The linker will take care of this linkage. 
+
+Suppose we changed `support.c` and added `static` to the defined variable, `g_computers`. The file would look something like this:
+
+```c
+#include <stdio.h>
+
+static int g_computers = 200;
+
+void process() {
+   g_computers++;
+}
+```
+
+And now, the code will not compile. The compiler will throw an error such as this:
+
+``` bash
+gcc *.c
+
+/tmp/...: In function `main`:
+/afs/glue.umd.edu/.../variables/main.c:19: undefined reference to ;'g_computers'
+collect2: error: ld returned 1 exit status
+```
+
+Let's see what this error message means.
+* In function main, we have an "undefined referece to `g_computers`.
+    * This means that although there is an `extern` **declaration**, it has not been **defined**. 
+* collect2: error: ld
+    * `ld` is the linker. Since it reterned an `exit` status, we can see that it was unable to complete its linkages. 
+
+Some things to note:
+* If we were to change
+  ``` c
+  int g_computers = 200;
+  ```
+  to
+  ``` c
+  int g_computers;
+  ```
+  our output would change to reflect that global variables are initialized with the value of 0. The program would still work, but it will start at 0 instead of 200. 
+* If we were to remove `extern` from
+  ``` c
+  extern int g_computers;
+  ```
+  the program will still work the same way, since `extern` is used by default even if it's not added there by the programmer.
+* If we made `main.c` to have
+  ``` c
+  /* Declaration */
+  int g_computers = 10;
+  ```
+  **AND**
+  support.c to have:
+  ``` c
+  int g_computer = 20;
+  ```
+  When we compile the program, we will get this error:
+  ``` bash
+  gcc *.c
+  /tmp/...:(.data+0x0): multiple definition of `g_computers`
+  /tmp/...:    ...    : first defined here
+  collect2: errpr: ld retured 1 exit status
+  ```
+  This shows that by setting a value, we are defining.
+
+## Interesting Nelson Quote:
+"This class is brought to you by Starbucks" - Nelson.
+
+## Interesting Unix Commands:
+
+Here are some interesting Unix commands that can be used.
+
+### `finger`
+
+The command `finger` lets you `finger` someone on a server such that you can get some information about their user.
+
+For example, if I were to `finger` myself:
+
+```bash
+grace10:~: finger sprakash
+Login: sprakash                         Name: Sashwath Prakash
+Directory: /afs/glue.umd.edu/home/glue/s/p/sprakash/home        Shell: /bin/tcsh
+On since Fri Jun 10 02:56 (EDT) on pts/0 from [REDACTED IP]
+   7 seconds idle
+No mail.
+No Plan.
+```
+
+### `ps`
+
+The `ps`, or process command, lets you see what processes someone is running. For example, you can use this with the flags `-fu` to see what someone is doing:
+
+``` bash
+grace10:~: ps -fu sprakash
+UID        PID  PPID  C STIME TTY          TIME CMD
+sprakash  7052  7035  0 02:56 ?        00:00:00 sshd: sprakash@pts/0
+sprakash  7057  7052  0 02:56 pts/0    00:00:00 -tcsh
+sprakash 22405  7057  0 04:17 pts/0    00:00:00 ps -fu sprakash
+```
+
+To see all the processes on the system, we can use
+
+``` bash
+grace10:~: ps -e
+  PID TTY          TIME CMD
+    1 ?        02:55:24 systemd
+    2 ?        00:00:30 kthreadd
+    4 ?        00:00:00 kworker/0:0H
+    6 ?        00:03:16 ksoftirqd/0
+    .
+    .
+    .
+```
+
+### `who am i`
+
+This command tells you who you are
+
+``` bash
+grace10:~: who am i
+sprakash pts/0        2022-06-10 02:56 (REDACTED IP)
+```
+
+### `who`
+
+This command tells you who is on the same machine as you
+
+``` bash
+grace10:~: who
+sprakash pts/0        2022-06-10 02:56 (REDACTED IP)
+ishi     pts/1        2022-06-09 23:27 (REDACTED IP)
+```
+
+### `cal`
+
+This command gives you a nice looking calendar
+
+``` bash
+grace10:~: cal
+      June 2022
+Su Mo Tu We Th Fr Sa
+          1  2  3  4
+ 5  6  7  8  9 '10' 11
+12 13 14 15 16 17 18
+19 20 21 22 23 24 25
+26 27 28 29 30
+```
+
+But the date is somehow highlighted on an ssh client.
+
+### `date`
+
+This command tells you the date
+
+``` bash
+grace10:~: date
+Fri Jun 10 04:24:46 EDT 2022pep 
+```
+
+### `mesg y` 
+
+Lets you enable your messages
+
+### `write $user`
+
+Lets you write to a user by replacigng `$user` with their username.
+
+## Enumerated types
+
+Back to learning about C
+
+* We can use these to represent things that only take on certain values
+* Values equalt to 0, 1, 2... based on order of definition.
+* Values can be set by programmer to things other than 0, 1, 2...
+* Based on intergers, but don't mix enums with intergers unless absolutely necessary.
+
+```c
+#include <stdio.h>
+
+int main () {
+    enum Suit {
+        SPADES, HEARTS,
+        DIAMONDS = 42, CLUBS
+    };
+
+    enum Suit suit1, suit2;
+
+    suit1 = SPADES;
+
+    suit2 = CLUBS;
+
+    if (suit1 < suit2)
+        printf("Spades are furst.\n");
+    else
+        printf("Clubs are first.\n");
+    printf("Spades = %d, Clubs = %d\n", suit1, suit2);
+
+    return 0;
+}
+```
+
+You'll see that `SPADES = 1`, and `CLUBS = 43`.
+
+## Lvalues and Rvalues
+* An `rvalue` is anything that can appear on the right side of an assignment statement
+    * Virtually any expression
+* An `lvalue` is anything that can appear on the left side of an assignment statement
+    * Values that represent a place to store a values (e.g., variables, array entry)
+* The right and left sides of an assignment statement are treated differently.
+    * Right hadn side is a value, left hadn side is a location to store a value (an address)
+
+## Typecasting
+* In c, we can have **explicit** and **implicit** type conversions.
+* We can have explicit conversion using casting:
+    ```c
+    float f = 3.45;
+    int x = (int)f;
+    ```
+* C performs integer promotions
+    * Small integer types (e.g., **char**, **short**) in expression sare converted to **int**.
+* Arithmetic operators require their operands to be of same type to perform the operation.
+    * C ompiler performs type conversios automatically (**implicit type conversions**) when an expression involves different types. 
+* When two operands of different types are involved in an expression, the lower rank operand will be converted to the data type of the higher rank. For example, if we have a double and a float expression, the float will be converted to a double. The following types are ordered from high to low rank:
+    * long double
+    * double
+    * float
+    * unsigned long int
+    * long int
+    * unsigned int
+    * int 
+    * char, short
+* [Reference](https://overiq.com/c-programming-101/implicit-type-conversion-in-c)
+* Note: `char` and `short` is converted to `int`, then it is compared to the other.
+* Implicit casting also takes place during assignments and when calling a function with an argument that does not match the parameter
+* Be careful and avoid mixing types unless you are sure is safe.
+* Do not ignore compiler warnings and pay attention to messages generated by tools
