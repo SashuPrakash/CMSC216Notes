@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>lecture4.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-4---632022">Lecture 4 - 6/3/2022</h1>
+<h2 id="shooting-an-xterm">Shooting an <code>xterm</code></h2>
+<p>By running the command:</p>
+<pre class="hljs"><code><div>xterm &amp;
+</div></code></pre>
+<p>You will see that a new window shoots so you can have another window to work with grace.</p>
+<p>This is possible because of the <code>xserver</code> that is installed with <code>MobaXTerm</code> or <code>XQuartz</code>. An <code>xserver</code> allows you to have graphical interfaces through SSH.</p>
+<h2 id="customizing-an-xterm">Customizing an <code>xterm</code></h2>
+<p>These can by customized using flags such as:</p>
+<ul>
+<li><code>-fa licudatypwriter</code> to set the font to lucudatypewriter</li>
+<li><code>-fs 10</code> to set the font size to 10</li>
+<li><code>-fg white</code> to set the foreground to white</li>
+<li><code>-bg black</code> to set the background to black</li>
+</ul>
+<p>Using <code>xterm</code>s can allow you to edit files and run them in different windows.</p>
+<h3 id="xclock"><code>xclock</code></h3>
+<p>The command</p>
+<pre class="hljs"><code><div>xclock
+</div></code></pre>
+<p>Shoots a GUI of a clock. It's a crappy clock but it's still a clock. If you put an <code>&amp;</code> after an <code>xserver</code> command such as this, you'll still be able to use the command line.</p>
+<h2 id="file-editor-kate">File Editor: <code>kate</code></h2>
+<p>Kate is a file editor available on Grace. It's faster than <code>emacs</code> and it seems to be user friendly.</p>
+<p>Kate is local to Grace, so you know it'll work. Nelson has been playing with VS Code, but it's messy and he doesn't want us to waste time on it instead of learning C and stuff.</p>
+<h2 id="types-in-c">Types in C</h2>
+<p>There are differnt types in C, each with different numbers of bytes. For example, <code>int</code> and <code>long</code> have a different number of bytes. The number of bytes can be different depending on the environment that the program is compiled and run on.</p>
+<ul>
+<li>The only type with a consisted number of bytes is <code>char</code>.
+<ul>
+<li>The <code>char</code> type is also sometimes called the <code>byte</code> type because we'll see that it gives us the ability to traverse bytes.</li>
+</ul>
+</li>
+</ul>
+<p>Warning from Nelson: &quot;Do not mix or randomly cast types unless you know what you're doing&quot;</p>
+<h3 id="example-mixedtypes1c">Example: <code>mixed_types_1.c</code></h3>
+<p>These examples come from experiences where students were spending lots of time debugging issues that pertained to misusing types:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+   <span class="hljs-keyword">int</span> x = <span class="hljs-number">2000000000</span>; <span class="hljs-comment">/* value fits in x */</span>
+   <span class="hljs-keyword">long</span> result_long;
+
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Value of x: %d\n"</span>, x);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Multiplying by 3 (with %%d format): %d\n"</span>, <span class="hljs-number">2000000000</span> * <span class="hljs-number">3</span>);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Multiplying by 3 (with %%ld format): %ld\n"</span>, <span class="hljs-number">2000000000</span> * <span class="hljs-number">3</span>);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Multiplying by 3L (with %%d format): %d\n"</span>, <span class="hljs-number">2000000000</span> * <span class="hljs-number">3L</span>);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Multiplying by 3L (with %%ld format): %ld\n"</span>, <span class="hljs-number">2000000000</span> * <span class="hljs-number">3L</span>);
+
+   result_long = <span class="hljs-number">2000000000</span> * <span class="hljs-number">3</span>;  <span class="hljs-comment">/* Does it solve the problem? */</span>
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Storing result in long type variable: %ld\n"</span>, result_long);
+
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>In this code, we try to take 2 billion, and multipy it by three, then print it. The problem here, is that the <code>int</code> in our system can accomodate 2 billion, but not 6 billion. This is because we don't have enough bytes in an <code>int</code> to hold the value of 2 billion.</p>
+<ul>
+<li>Could this be because of the conversion specifier (<code>%d</code>, <code>%f</code>, etc.)?
+<ul>
+<li>The conversion specifier looks at a set of bytes and interprets them as a certain type, such as <code>int</code> or <code>double</code> or <code>char</code> or <code>float</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Let's take a look at the output of this code:</p>
+<pre class="hljs"><code><div>grace7:~/216/lecture_examples/Week01/C-Language-III-Code: a.out
+Value of x: 2000000000
+Multiplying by 3 (with %d format): 1705032704
+Multiplying by 3 (with %ld format): 1705032704
+Multiplying by 3L (with %d format): 1705032704
+Multiplying by 3L (with %ld format): 6000000000
+Storing result in long type variable: 1705032704
+</div></code></pre>
+<p>As you can see, we only get the correct answer once. This is because the result of <code>2000000000 * 3L</code> is correctly interpreted as a <code>long</code>. In the other tries, either the result was stored as an <code>int</code>, which is too small to hold the value of 6 billion, or the result was interpreted as an <code>int</code> even when the result was a <code>long</code>.</p>
+<p>The stored result is also incorrect because the operation was done with <code>int</code>s, and stored in a space interpreted as a <code>long</code>.</p>
+<h3 id="example-mixedtypes2c">Example: <code>mixed_types_2.c</code></h3>
+<p>This code empahsizes a thing called &quot;testing&quot;:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+   <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> value = <span class="hljs-number">250</span>;  <span class="hljs-comment">/* try with 250 and 4000000000 */</span>
+
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\nType sizes\n"</span>);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"sizeof(unsigned int): %ld\n"</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span>));
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"sizeof(int): %ld\n"</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>));
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"sizeof(long): %ld\n\n"</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">long</span>));
+
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"value: %u\n"</span>, value);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"(int)value: %d\n"</span>, (<span class="hljs-keyword">int</span>)value);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"(long)value: %ld\n"</span>, (<span class="hljs-keyword">long</span>)value);
+
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"(int)value / 4: %d\n"</span>, (<span class="hljs-keyword">int</span>)value / <span class="hljs-number">4</span>);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"value / 4: %d\n"</span>, value / <span class="hljs-number">4</span>);
+
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>Let's also take a look at its output:</p>
+<pre class="hljs"><code><div>grace7:~/216/lecture_examples/Week01/C-Language-III-Code: a.out
+
+Type sizes
+sizeof(unsigned int): 4
+sizeof(int): 4
+sizeof(long): 8
+
+value: 250
+(int)value: 250
+(long)value: 250
+(int)value / 4: 62
+value / 4: 62
+</div></code></pre>
+<p>As we can see, we can see how many bytes a type uses with the <code>sizeof()</code> operator.</p>
+<p>An <code>unsigned int</code> is an <code>int</code> with no negative values.</p>
+<ul>
+<li>This is useful in cases where we will not be using negative values in our calculations. This way, we will have a larger range of intergers available with the type.</li>
+</ul>
+<h3 id="casting">Casting</h3>
+<p>When we cast a variable, the compiler performs the calculations necessary to transform the data stored as one type into data that can be interpreted as the new type.</p>
+<ul>
+<li>For example
+<ul>
+<li><code>double</code>'s decimals will be chopped off to become <code>int</code></li>
+<li><code>char</code> will be changed into ASCII version of <code>int</code> for <code>int</code></li>
+</ul>
+</li>
+</ul>
+<p>Although we get the expected answers, we aren't actually performing these calculations correctly. We can see this by testing using a value of <code>4000000000</code> instead of <code>250</code>. When we change the value of that variable, the output changes:</p>
+<pre class="hljs"><code><div>grace7:~/216/lecture_examples/Week01/C-Language-III-Code: a.out
+
+Type sizes
+sizeof(unsigned int): 4
+sizeof(int): 4
+sizeof(long): 8
+
+value: 4000000000
+(int)value: -294967296
+(long)value: 4000000000
+(int)value / 4: -73741824
+value / 4: 1000000000
+</div></code></pre>
+<p>As we can see, we have values that are negative, even though we wouldn't expect any of these values to be negative. To understand why this is, we need to know what happens behind the scenes. The reason why it doesn't work in this case is because an <code>int</code> is different from an <code>unsigned int</code>. Since <code>int</code>s have negative numbers, their data is interpreted differently than <code>unsigned int</code>s, thereby leading to this type of error.</p>
+<h3 id="example-mixedtypes3c">Example: <code>mixed_types_3.c</code></h3>
+<p>Take a look at this example code:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">process</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *str)</span> </span>{
+   <span class="hljs-keyword">size_t</span> k, value = <span class="hljs-number">2</span>;
+   <span class="hljs-keyword">size_t</span> delta = <span class="hljs-built_in">strlen</span>(str) - value; <span class="hljs-comment">/* problem: possible negative */</span>
+   <span class="hljs-keyword">int</span> answer_is_yes;                  <span class="hljs-comment">/* value assigned to delta (unsigned) */</span>
+   <span class="hljs-keyword">char</span> c;
+
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Delta value: %ld\n"</span>, delta);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter \"yes\" to continue: "</span>);
+   answer_is_yes = <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"ye%c"</span>, &amp;c);
+   <span class="hljs-keyword">if</span> (answer_is_yes == <span class="hljs-number">1</span>) {
+      <span class="hljs-keyword">for</span> (k = <span class="hljs-number">0</span>; k &lt; delta; k++) {
+         <span class="hljs-built_in">printf</span>(<span class="hljs-string">"In loop %ld\n"</span>, k);
+      }
+   }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-built_in">process</span>(<span class="hljs-string">"house"</span>);   <span class="hljs-comment">/* problem when using "a" */</span>
+
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>Let's also see the output of this code:</p>
+<pre class="hljs"><code><div>grace7:~/216/lecture_examples/Week01/C-Language-III-Code: a.out
+Delta value: 3
+Enter &quot;yes&quot; to continue: yes
+In loop 0
+In loop 1
+In loop 2
+</div></code></pre>
+<p>This program checks the size of the string and then loop from 0 to 2 less than that string length. The problem here arises when the word is is less than 2 characters long. In this case, we will see an infinite loop, because the loop's iteration variable never reaches <code>delta</code>, which is negative.</p>
+<p>Also, the datatype <code>size_t</code> is an <code>unsigned int</code>, so it cannot properly hold negative values.</p>
+<p>As you can see, it's important to be careful of the types used for values that might be negative.</p>
+<p>Here is the fixed version, <code>mixed_types_3_fixed.c</code>:</p>
+<pre class="hljs"><code><div>grace6:~/216/lecture_examples/Week01/C-Language-III-Code: cat mixed_types_3_fixed.c
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">process</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *str)</span> </span>{
+   <span class="hljs-keyword">long</span> <span class="hljs-keyword">int</span> k, value = <span class="hljs-number">2</span>;
+   <span class="hljs-keyword">long</span> <span class="hljs-keyword">int</span> delta = (<span class="hljs-keyword">long</span> <span class="hljs-keyword">int</span>)<span class="hljs-built_in">strlen</span>(str) - value;
+   <span class="hljs-keyword">int</span> answer_is_yes;
+   <span class="hljs-keyword">char</span> c;
+
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Delta value: %ld\n"</span>, delta);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter \"yes\" to continue: "</span>);
+   answer_is_yes = <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"ye%c"</span>, &amp;c);
+   <span class="hljs-keyword">if</span> (answer_is_yes == <span class="hljs-number">1</span>) {
+      <span class="hljs-keyword">for</span> (k = <span class="hljs-number">0</span>; k &lt; delta; k++) {
+         <span class="hljs-built_in">printf</span>(<span class="hljs-string">"In loop %ld\n"</span>, k);
+      }
+   }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-built_in">process</span>(<span class="hljs-string">"house"</span>);   <span class="hljs-comment">/* problem when using "a" */</span>
+
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>As we can see, the solution to this infinite loop problem is to use <code>long int</code> to store values that may be negative.</p>
+<h2 id="switching-between-clusters">Switching Between Clusters</h2>
+<p>You can switch from one node to another node within the Grace cluster by <code>ssh</code>ing to another node within the Grace cluster. This may help if there are many people on one node.</p>
+<p>For example</p>
+<pre class="hljs"><code><div>ssh grace4 
+</div></code></pre>
+<p>will put you on the <code>grace4</code> node. This can be useful when many people are on one node, which may slow it down. In this case, <code>ssh</code>ing into a node with less people can be faster.</p>
+<h2 id="the-sizeof-operator">The <code>sizeof</code> operator</h2>
+<ul>
+<li>Unary <strong>operator</strong>, evaluates to the number of bytes necessary to hold its operand</li>
+<li>Operand can be an expression or a type name
+<ul>
+<li>It does NOT evaluate the expression</li>
+</ul>
+</li>
+<li>Example:
+<ul>
+<li>Let's say<pre class="hljs"><code><div><span class="hljs-keyword">int</span> i = <span class="hljs-number">5</span>;
+</div></code></pre>
+</li>
+<li>we can use <code>sizeof()</code> like this:
+<ul>
+<li>
+<pre class="hljs"><code><div><span class="hljs-built_in">printf</span>(<span class="hljs-string">"%ld\n"</span>, <span class="hljs-keyword">sizeof</span>(i));
+</div></code></pre>
+</li>
+<li>
+<pre class="hljs"><code><div><span class="hljs-built_in">printf</span>(<span class="hljs-string">"%ld\n"</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span>));
+</div></code></pre>
+</li>
+<li>
+<pre class="hljs"><code><div><span class="hljs-built_in">printf</span>(<span class="hljs-string">"%ld\n"</span>, <span class="hljs-keyword">sizeof</span>(++i));
+</div></code></pre>
+<ul>
+<li>here, the value of <code>++i</code> will <strong>NOT</strong> evaluated. Instead, we will see the size of this operation. So, the value of <code>i</code> will <strong>not</strong> change.</li>
+</ul>
+</li>
+<li>
+<pre class="hljs"><code><div><span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, i);
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="pointers">Pointers</h2>
+<ul>
+<li>Pointer -&gt; memory address, address, reference are equivalent terms</li>
+<li><strong>Pointer variable</strong> -&gt; Variable whose value is an address
+<ul>
+<li>Informally we call a pointer variable a pointer, but that can be misleading (similar to calling an integer variable an integer)</li>
+</ul>
+</li>
+<li>A <strong>pointer variable</strong> has a fixed number of bytes as an address in a system has a fixed number of bytes</li>
+<li>A <strong>pointer variable stores</strong> the address of the first byte of an int, float, double, etc. Not the whole address; just the address of the first bye</li>
+<li><strong>Let’s see a diagram</strong></li>
+<li>A pointer variable is defined as follows:<pre class="hljs"><code><div>&lt;TYPE&gt;&lt;ZERO_OR_MORE_SPACES&gt;*&lt;ZERO_OR_MORE_SPACES&gt;&lt;VARIABLE_NAME&gt;;
+</div></code></pre>
+</li>
+<li>Example: <code>int*ip;</code>
+<ul>
+<li>Creates a variable called ip whose type is &quot;pointer to int“</li>
+</ul>
+</li>
+<li>All the following are equivalent:<pre class="hljs"><code><div><span class="hljs-keyword">int</span>*p; <span class="hljs-comment">/* no spaces */</span>
+<span class="hljs-keyword">int</span>* p; <span class="hljs-comment">/* helps emphasize p is a “variable that stores address of int */</span>
+<span class="hljs-keyword">int</span> * p;
+<span class="hljs-keyword">int</span> *p; <span class="hljs-comment">/* the one we prefer */</span> <span class="hljs-comment">/* see man 3 scanf in linux */</span>
+</div></code></pre>
+</li>
+<li>Obtaining the address of an lvalue (&amp;)
+<ul>
+<li>Placed before a variable (or an lvalue)</li>
+<li><strong>Returns the address of the first byte</strong></li>
+</ul>
+</li>
+<li>Accessing the entity at an address (*)
+<ul>
+<li>Placed before an expression which is either a pointer variable or otherwise evaluates to a pointer</li>
+<li><strong>Returns the entity that lives at the specified address</strong></li>
+<li>Confusing as same symbol (*) used to define a variable as a pointer variable and to dereference</li>
+</ul>
+</li>
+</ul>
+<h3 id="written-example">Written Example</h3>
+<p>To further explain the concept of pointers, let's define a variable <code>x</code>:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> x;
+</div></code></pre>
+<p>This variable <code>x</code> represents a value in memory. We can represent this space of memory with this drawing:</p>
+<p><img src="AddressOfX.jpg" alt=""></p>
+<p>In this memory, we can see that there are four bytes next to each other that hold the value of this variable <code>x</code>. The addresses of these bytes, <code>8000</code>, <code>8001</code>, <code>8002</code>, and <code>8003</code>, have been chosen randomly for the purposes of this example but they're still next to each other and have incremental memory addresses.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/////////////////////////////////// here ///////////////////////////////////////</span>
+</div></code></pre>
+<h3 id="example-readingc">Example: <code>reading.c</code></h3>
+<p>Take a look at this code that shows the usage of pointers</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+   <span class="hljs-keyword">int</span> age, values_read;
+   <span class="hljs-keyword">int</span>* age_ptr = &amp;age;
+   <span class="hljs-keyword">float</span> salary;
+
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter your age and salary (using &lt;age&gt;-&lt;salary&gt; format): "</span>);
+
+   <span class="hljs-comment">/* This example shows we don't always use &amp; in variables of a scanf */</span>
+   values_read = <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d-%f"</span>, age_ptr, &amp;salary);
+   <span class="hljs-keyword">if</span> (values_read != <span class="hljs-number">2</span>) {
+      <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Invalid data provided\n"</span>);
+   } <span class="hljs-keyword">else</span> {
+      <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Provided values Age: %d, Salary: $%.2f\n"</span>, age, salary);
+   }
+
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+
+</body>
+</html>
