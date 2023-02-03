@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lec1-Thu-1-26-2023.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-1-thursday-1262023">Lecture 1 Thursday 1/26/2023</h1>
+<h2 id="introduciton">Introduciton</h2>
+<p>The instructor, Larry Hermon, does not reccommend reading Bryant and O'whateverTheBookIsCalled even though this class is based on that book.</p>
+<h2 id="motivating-concepts">Motivating Concepts</h2>
+<p>A bit is a binary digit (Binary digIT -&gt; BIT).</p>
+<ul>
+<li>stored in groups of 8, which are called bytes.</li>
+</ul>
+<p>Bytes are stored in groupes of bytes called words.</p>
+<p>32-bit machines have 32 wires carrying data between components.</p>
+<ul>
+<li>similarly, 64-bit machines have 64 wires carrying data between components.</li>
+</ul>
+<p>The wires (usually 32 or 64 parallel wires) connecting components in a computer is called a bus.</p>
+<p>In 32-bit machines, one word is 32 bits, or 4 bytes.</p>
+<ul>
+<li>similary, 64 bits, 8 bits, one word.</li>
+</ul>
+<p>In memory, everythin is just bits. Howe they're treated and interpreted by the computer and its code determines if it's considered an int, char, etc.</p>
+<p>Machine language is a series of numbers that tells the computer what to do. It's different for each computer/COU.</p>
+<ul>
+<li>Machine language is executed sequentially, but some instruction scan make execution go somewhere else, similar to loops or if statements.</li>
+</ul>
+<p>Assembly is a human-readable version of machine language</p>
+<ul>
+<li>an Assembler converts assembly to machine language.</li>
+</ul>
+<p>High-level languages such as C, Java, Python, etc. are turned into machine language by a compiler.</p>
+<h2 id="assembly-language-example">Assembly Language Example</h2>
+<pre class="hljs"><code><div>        .data
+<span class="hljs-symbol">sum:</span>    .word   <span class="hljs-number">0</span>               <span class="hljs-comment"># initialize sum to 0</span>
+<span class="hljs-symbol">x:</span>      .word   <span class="hljs-number">1</span>               <span class="hljs-comment"># initialize x to 1</span>
+
+        .text
+<span class="hljs-symbol">main:</span>   li      $t3, <span class="hljs-number">1</span>          <span class="hljs-comment"># store 1 in a register</span>
+<span class="hljs-symbol">loop:</span>   lw      $t0, sum        <span class="hljs-comment"># get the value of sum</span>
+        lw      $t1, x          <span class="hljs-comment"># get the value of x</span>
+        add     $t0, $t0, $t1   <span class="hljs-comment"># add x to sum</span>
+        sw      $t0, sum        <span class="hljs-comment"># update value in memory</span>
+        add     $t1, $t1, $t3   <span class="hljs-comment"># add 1 to x</span>
+        sw      $t1, x          <span class="hljs-comment"># update value in memory</span>
+        ble     $t1, <span class="hljs-number">10</span>, loop   <span class="hljs-comment"># if x &lt;= 10 go back to 'loop'</span>
+        
+        li      $v0, <span class="hljs-number">1</span>          <span class="hljs-comment"># print the value of sum</span>
+        move    $a0, $t0
+        syscall
+        
+        li $v0, <span class="hljs-number">10</span>
+        syscall                 <span class="hljs-comment"># end of program; stop running</span>
+</div></code></pre>
+<p>In this example:</p>
+<ul>
+<li><code>.data</code> means what comes after this is data</li>
+<li><code>#</code> starts a comment</li>
+<li><code>.text</code> means what comes after th is is code</li>
+<li><code>main</code> and <code>loop</code> is the name of the functions</li>
+</ul>
+<h2 id="hardware-organizaton---main-components">Hardware Organizaton - Main Components</h2>
+<p>The main components in a computer are:</p>
+<ul>
+<li>CPU (Central Processing Unit) does all the processing and follows the instructions given to it.</li>
+<li>Memory is a list of locations to memory locations. Each location is word-sized.</li>
+<li>Registers are fast-access locations like a memory location, except registers are located in the CPU. Registers are word sized. Registers are expensive.</li>
+<li>Mass storage (hard drives, SSDs) are the storage most files are stored in a computer long term.</li>
+<li>Remote storage are other computers with usually a lot of mass storage which can be accessed through a network.</li>
+</ul>
+<h2 id="machine-language-example">Machine Language Example</h2>
+<p>The same assembly language shown above, when compiled to machine code, looks like this (in machine code for one particular machine):</p>
+<pre class="hljs"><code><div>87313612910
+06702593235
+14316801006
+70259323514
+97220173834
+56100670259
+32888302592
+19613728100
+67025932888
+36813269002
+85553377069
+97872546305
+53251312872
+54631412
+</div></code></pre>
+<h2 id="the-memory-hierarchy">The Memory Hierarchy</h2>
+<p>The memory hierarchy diagram on slide 12 of Larry Herman's Lecture 1 slides shows how some memory can be larger and others can be more expensive.</p>
+<p><img src="MemoryHierarchy.png" alt="Diagram of Memory Hierarchy"></p>
+<h2 id="the-operating-system">The Operating System</h2>
+<p>The operating system:</p>
+<ul>
+<li>manages the computer's resources</li>
+<li>protects the comptuer from misuse</li>
+<li>provides abstraction and mechanisms so that programs can (safely) manipulate the hardware</li>
+</ul>
+<h2 id="process">Process</h2>
+<p>A Process is a running program (one or more threads of control) along with all the data associated with it (an address space)</p>
+<p>The OS uses context switching to give a program the illusion that it's the only program running (a program isn't affected by running programs).</p>
+<h2 id="unix-virtual-addess-space-simplified">Unix Virtual Addess Space (simplified)</h2>
+<p>This simplified diagram of the unix virtual address space shows how unix memory works</p>
+<p><img src="UnixVirtualAddressSpaceSimplified.png" alt="Diagram of the Unix Virtual Address Space"></p>
+<h2 id="two-versions-of-a-java-method">Two Versions of a Java Method</h2>
+<p>Consider these two versions of a Java method</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">sum</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[][] array)</span> </span>{
+    <span class="hljs-keyword">int</span> i, j, ans= <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (i= <span class="hljs-number">0</span>; i &lt; array.length; i++)
+        <span class="hljs-keyword">for</span> (j= <span class="hljs-number">0</span>; j &lt; array[i].length; j++)
+            ans += array[i][j];
+    <span class="hljs-keyword">return</span> ans;
+}
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">sum</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[][] array)</span> </span>{
+    <span class="hljs-keyword">int</span> i, j, ans= <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (i= <span class="hljs-number">0</span>; i &lt; array.length; i++)
+        <span class="hljs-keyword">for</span> (j= <span class="hljs-number">0</span>; j &lt; array[i].length; j++)
+            ans += array[j][i]; <span class="hljs-comment">// the only difference</span>
+    <span class="hljs-keyword">return</span> ans;
+}
+</div></code></pre>
+<p>There is only one difference between these two methods in the code, and the two methods produce the same result. However, the first method is very much faster than the second one. We'll learn why when we learn about how we allocate and iterate through memory.</p>
+<h2 id="another-java-method">Another Java Method</h2>
+<p>Consider this other Java method:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">sumArray</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] array)</span> </span>{
+    <span class="hljs-keyword">int</span> i, sum= <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (i= <span class="hljs-number">0</span>; i &lt; array.length; i++)
+        <span class="hljs-keyword">if</span> (array[i] &gt;= <span class="hljs-number">500</span>)
+            sum += array[i];
+    <span class="hljs-keyword">return</span> sum;
+}
+</div></code></pre>
+<p>This method adds numbers in an array together.</p>
+<p>In a test done in class, sorted arrays were always faster to sum. We'll see why at the end of the semester or something.</p>
+<h2 id="reek-chapter-1-a-quick-start-with-c">Reek, Chapter 1: A Quick Start with C</h2>
+<p>C has:</p>
+<ul>
+<li>No classes or objects</li>
+<li>No notion of a current object</li>
+<li>No inheritance (or interfaces)</li>
+<li>No generics</li>
+<li>No overloading</li>
+<li>No overriding</li>
+<li>No reference/object dichotomy</li>
+<li>No garbage collection</li>
+<li>No exceptions</li>
+<li>No library collections (no data structures in the library like the Java Collections Framework)</li>
+</ul>
+<p>Other than that, it's just like Java.</p>
+<p>C is typically fully compiled (to machine code), and not interpreted or compiled to bytecode like Java is.</p>
+<ul>
+<li>Java is good for programs that should run the same on different machines</li>
+<li>C is good for programs that should run differently on each machine, like an OS.</li>
+</ul>
+<p>C facilitates direct manipulation of memory.</p>
+<h2 id="a-first-c-program">A first C program</h2>
+<p>Consider this C program and notice how it works:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-comment">/* a nice C program */</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-keyword">int</span> x= <span class="hljs-number">0</span>;
+    
+    x++;
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Just forget "</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"all about "</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Java now.\n"</span>);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>Things to note:</p>
+<ul>
+<li>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+</div></code></pre>
+is like an <code>import</code> in Java</li>
+<li><code>stdio</code> is standard input and output so C can use the computer's I/O.</li>
+<li>In c90 C, this is the only way to make a comment:<pre class="hljs"><code><div><span class="hljs-comment">/* this is a comment */</span>
+</div></code></pre>
+There are no<pre class="hljs"><code><div><span class="hljs-comment">// comments like this in C</span>
+</div></code></pre>
+</li>
+<li><code>main()</code> is where execution starts. It is not a method; it's a funtion.</li>
+<li><code>printf()</code> prints to <code>stdio</code>.</li>
+<li>The textbook uses <code>EXIT_SUCCESS</code> insted of <code>return 0</code>, which is better stylistically, but both are equivalent.</li>
+<li><code>/n</code> is an escape sequence which prints a newline, but it's not &quot;a newline&quot;.</li>
+</ul>
+<h2 id="the-gcc-compiler">The GCC Compiler</h2>
+<p>Use gcc by typing <code>gcc</code>, some options, and the source file name.</p>
+<ul>
+<li>
+<p>options:</p>
+<ul>
+<li><code>-g</code></li>
+<li><code>-wall</code> this option will give you warnings of what might be wrong with the c code.</li>
+<li><code>-o filename</code> this option lets you specify the name of the outputted executable instead of the default <code>a.out</code>.</li>
+</ul>
+</li>
+<li>
+<p>ex:</p>
+<ul>
+<li>to compile a program called <code>program.c</code>, use this command in the CLI:<pre class="hljs"><code><div>gcc program.c
+</div></code></pre>
+<ul>
+<li>this will compile <code>program.c</code> into an executable called <code>a.out</code>.</li>
+</ul>
+</li>
+<li>this is another command to compile a program called <code>program.c</code>:<pre class="hljs"><code><div>gcc -g -Wall program.c -o program.x
+</div></code></pre>
+<ul>
+<li>this will compile the file <code>program.c</code> into an executable called <code>program.x</code> while using the options <code>-g</code> and <code>-Wall</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="running-a-compiled-program">Running a Compiled Program</h2>
+<p>After compiling a program, run it by typing the name of the executable into the CLI. For example:</p>
+<ul>
+<li>run <code>a.out</code> by typing into the CLI:<pre class="hljs"><code><div>a.out
+</div></code></pre>
+</li>
+<li>run <code>program.x</code> by typing into the CLI:<pre class="hljs"><code><div>program.x
+</div></code></pre>
+</li>
+</ul>
+<h2 id="c-filenames">C filenames</h2>
+<p>C requires that C programs be written in files which end with <code>.c</code></p>
+<ul>
+<li>ex: <code>program.c</code></li>
+</ul>
+<p>End of Today's Lecture</p>
+
+</body>
+</html>
