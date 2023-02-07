@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Disc1-Wed-1-25-2023.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="discussion-1---wednesday-1252023">Discussion 1 - Wednesday, 1/25/2023</h1>
+<h2 id="intruduction">Intruduction</h2>
+<p>We don't use Java in this class</p>
+<p>We code in an environment where we connect to the Grace cluster. It uses the OS Red Hat Enterprise Linux which is a Unix environment. This environment runs a tcsh shell.</p>
+<h2 id="ssh">SSH</h2>
+<p>To use SSH, type <code>ssh</code> into the command line.</p>
+<p>Wait, First, we must take a look at this handed out piece of paper. This piece of paper has many ssh commands.</p>
+<p>To use SSH, type <code>ssh -Y {directoryid}@grace.umd.edu</code> into the command line (Mac).</p>
+<p>Then, type in your directory id password.</p>
+<p>To disconnect from grace, type <code>exit</code>.</p>
+<h2 id="some-basic-unix-commands">Some basic unix commands:</h2>
+<h2 id="ls"><code>ls</code></h2>
+<p>This lists all the items in the directory you're in.</p>
+<h2 id="ls--l"><code>ls -l</code></h2>
+<p>Gives more information, including the priviledge for each file. Things with x at the end stands for executable. Things with an arrow <code>-&gt;</code> shows the file is a shortcut.</p>
+<h2 id="cd"><code>cd</code></h2>
+<p>Stands for &quot;change directory&quot;. changes your working directory to whichever directory you specify</p>
+<h2 id="mkdir"><code>mkdir</code></h2>
+<p>Stands for &quot;make directory&quot;. creates a directory (folder).</p>
+<h2 id=""><code>.</code></h2>
+<p>The <code>.</code> represents the current directory</p>
+<h2 id="pwd"><code>pwd</code></h2>
+<p>Stands for &quot;present working directory&quot;. it tells you what directory you're in.</p>
+<h2 id="mv"><code>mv</code></h2>
+<p>Stands for &quot;move&quot;. moves the first argument to the second argument</p>
+<h2 id="cp"><code>cp</code></h2>
+<p>Stands for &quot;copy&quot;. Copies the first argument to the second argument.</p>
+<p>Must use <code>-r</code> because it stands for recursive and it makes sure everything is copied</p>
+<h2 id="rm"><code>rm</code></h2>
+<p>Stands for &quot;remove&quot;. removes a directory or file. use <code>-r</code> to remove everything inside. <code>-r</code> stands for recursive.</p>
+<h2 id="rmdir"><code>rmdir</code></h2>
+<p>Stands for &quot;remove directory&quot;. recursively removes a directory.</p>
+<h2 id="logout"><code>logout</code></h2>
+<p>Does the same thing as <code>exit</code> but just for the login shell.</p>
+<h2 id="man"><code>man</code></h2>
+<p>Stands for &quot;manual&quot;. shows you the official manual for a command.</p>
+<h2 id="up-and-down-arrows">up and down arrows</h2>
+<p>These arrows allow you to scroll through your previously used commands so that you don't need to type them.</p>
+<h2 id="tab">tab</h2>
+<p>This key autocompletes while in the tcsh shell.</p>
+<h2 id="vim"><code>vim</code></h2>
+<p>This opens the <code>vim</code> editor which lets you edit a file you specify.</p>
+<h2 id="emacs"><code>emacs</code></h2>
+<p>This opens a graphical editor which lets your edit a file you specify. This requires an x-server which is what enables you to open a graphical interface through ssh.</p>
+<h2 id="x-servers">x-servers</h2>
+<p>If you're on Mac, download XQuartz to have a CLI (command line interface) with an x-server. If you're on windows, install mobaXterm.</p>
+<h2 id="vscode">vscode</h2>
+<p>how to set up vscode with grace for cmsc216: <a href="https://www.youtube.com/watch?v=X2wVY-7wvbw">https://www.youtube.com/watch?v=X2wVY-7wvbw</a></p>
+<h2 id="emacs-tutorial">emacs tutorial:</h2>
+<p>in emacs, press ctrl+h for help</p>
+<p>in emacs, use M-x snake to play snake</p>
+
+</body>
+</html>

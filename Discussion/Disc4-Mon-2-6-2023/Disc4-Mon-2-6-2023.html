@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Disc1-1-25-2023.md</title>
+<title>Disc4-Mon-2-6-2023.md</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <style>
@@ -365,57 +365,65 @@ code {
           : 'default'
     });
   </script>
-<h1 id="discussion-1---1252023">Discussion 1 - 1/25/2023</h1>
-<h2 id="intruduction">Intruduction</h2>
-<p>We don't use Java in this class</p>
-<p>We code in an environment where we connect to the Grace cluster. It uses the OS Red Hat Enterprise Linux which is a Unix environment. This environment runs a tcsh shell.</p>
-<h2 id="ssh">SSH</h2>
-<p>To use SSH, type <code>ssh</code> into the command line.</p>
-<p>Wait, First, we must take a look at this handed out piece of paper. This piece of paper has many ssh commands.</p>
-<p>To use SSH, type <code>ssh -Y {directoryid}@grace.umd.edu</code> into the command line (Mac).</p>
-<p>Then, type in your directory id password.</p>
-<p>To disconnect from grace, type <code>exit</code>.</p>
-<h2 id="some-basic-unix-commands">Some basic unix commands:</h2>
-<h2 id="ls"><code>ls</code></h2>
-<p>This lists all the items in the directory you're in.</p>
-<h2 id="ls--l"><code>ls -l</code></h2>
-<p>Gives more information, including the priviledge for each file. Things with x at the end stands for executable. Things with an arrow <code>-&gt;</code> shows the file is a shortcut.</p>
-<h2 id="cd"><code>cd</code></h2>
-<p>Stands for &quot;change directory&quot;. changes your working directory to whichever directory you specify</p>
-<h2 id="mkdir"><code>mkdir</code></h2>
-<p>Stands for &quot;make directory&quot;. creates a directory (folder).</p>
-<h2 id=""><code>.</code></h2>
-<p>The <code>.</code> represents the current directory</p>
-<h2 id="pwd"><code>pwd</code></h2>
-<p>Stands for &quot;present working directory&quot;. it tells you what directory you're in.</p>
-<h2 id="mv"><code>mv</code></h2>
-<p>Stands for &quot;move&quot;. moves the first argument to the second argument</p>
-<h2 id="cp"><code>cp</code></h2>
-<p>Stands for &quot;copy&quot;. Copies the first argument to the second argument.</p>
-<p>Must use <code>-r</code> because it stands for recursive and it makes sure everything is copied</p>
-<h2 id="rm"><code>rm</code></h2>
-<p>Stands for &quot;remove&quot;. removes a directory or file. use <code>-r</code> to remove everything inside. <code>-r</code> stands for recursive.</p>
-<h2 id="rmdir"><code>rmdir</code></h2>
-<p>Stands for &quot;remove directory&quot;. recursively removes a directory.</p>
-<h2 id="logout"><code>logout</code></h2>
-<p>Does the same thing as <code>exit</code> but just for the login shell.</p>
-<h2 id="man"><code>man</code></h2>
-<p>Stands for &quot;manual&quot;. shows you the official manual for a command.</p>
-<h2 id="up-and-down-arrows">up and down arrows</h2>
-<p>These arrows allow you to scroll through your previously used commands so that you don't need to type them.</p>
-<h2 id="tab">tab</h2>
-<p>This key autocompletes while in the tcsh shell.</p>
-<h2 id="vim"><code>vim</code></h2>
-<p>This opens the <code>vim</code> editor which lets you edit a file you specify.</p>
-<h2 id="emacs"><code>emacs</code></h2>
-<p>This opens a graphical editor which lets your edit a file you specify. This requires an x-server which is what enables you to open a graphical interface through ssh.</p>
-<h2 id="x-servers">x-servers</h2>
-<p>If you're on Mac, download XQuartz to have a CLI (command line interface) with an x-server. If you're on windows, install mobaXterm.</p>
-<h2 id="vscode">vscode</h2>
-<p>how to set up vscode with grace for cmsc216: <a href="https://www.youtube.com/watch?v=X2wVY-7wvbw">https://www.youtube.com/watch?v=X2wVY-7wvbw</a></p>
-<h2 id="emacs-tutorial">emacs tutorial:</h2>
-<p>in emacs, press ctrl+h for help</p>
-<p>in emacs, use M-x snake to play snake</p>
+<h1 id="discussion-4---monday-262023">Discussion 4 - Monday, 2/6/2023</h1>
+<h2 id="student-tests">Student Tests</h2>
+<p>Create student tests in files called <code>studentX.c</code> where <code>X</code> is a number pertaining to which test it is.</p>
+<h2 id="discussion-problems-scanf-printf">discussion problems: <code>scanf() printf()</code></h2>
+<p>Suppose we have these lines of code:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> x, u;
+<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d %d"</span>, &amp;x, &amp;y);
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"x is %d, y is %d\n"</span>, x, y);
+</div></code></pre>
+<p>If we input these values, what would the output be?</p>
+<pre class="hljs"><code><div>2 3
+</div></code></pre>
+<ul>
+<li>Output:<pre class="hljs"><code><div>x is 2, y is 3
+</div></code></pre>
+</li>
+</ul>
+<p>Input:</p>
+<pre class="hljs"><code><div>2 3 4
+</div></code></pre>
+<ul>
+<li>Output:<pre class="hljs"><code><div>x is 2, y is 3
+</div></code></pre>
+</li>
+</ul>
+<p>Input:</p>
+<pre class="hljs"><code><div>  3   4
+</div></code></pre>
+<ul>
+<li>Output:<pre class="hljs"><code><div>x is 3, y is 4
+</div></code></pre>
+</li>
+</ul>
+<p>Input:</p>
+<pre class="hljs"><code><div>23 456
+</div></code></pre>
+<ul>
+<li>Output:<pre class="hljs"><code><div>x is 23, y is 456
+</div></code></pre>
+</li>
+</ul>
+<p>Input:</p>
+<pre class="hljs"><code><div>23Z 4
+</div></code></pre>
+<ul>
+<li>Output:<pre class="hljs"><code><div>x is 23, y is 32746
+</div></code></pre>
+</li>
+</ul>
+<p>Input:</p>
+<pre class="hljs"><code><div>2
+3
+</div></code></pre>
+<ul>
+<li>Output:<pre class="hljs"><code><div>x is 2, y is 3
+</div></code></pre>
+</li>
+</ul>
+<h2 id="discussion-examples-printfa">Discussion Examples: <code>printf()</code>a</h2>
 
 </body>
 </html>
